@@ -70,12 +70,13 @@
 
 -(void)setTimeValue:(NSTimeInterval)timeValue{
     
+    timeUserValue = timeValue;
+    
     if (_timerType == MZTimerLabelTypeStopWatch && timeValue < 0) {
         timeValue = 0;
     }else if(_timerType == MZTimerLabelTypeTimer){
         timeValue += 0.98;
     }
-    timeUserValue = timeValue;
     _timeValue = timeValue;
     
     [self updateLabel:nil];
