@@ -25,7 +25,7 @@ _Remark: This is my first iOS plugin project on github, please accept my apologi
 
 ###Easy Example
 
-To use MZTimerLabel as a stopwatch and count, you need only __2 lines__.
+To use MZTimerLabel as a stopwatch and counter, you need only __2 lines__.
  ```objective-c
     MZTimerLabel *stopwatch = [[MZTimerLabel alloc] initWithLabel:aUILabel];
     [stopwatch start];
@@ -34,7 +34,7 @@ To use MZTimerLabel as a stopwatch and count, you need only __2 lines__.
 Easy? If you are looking for a timer, things is just similar.
  ```objective-c
     MZTimerLabel *timer = [[MZTimerLabel alloc] initWithLabel:aUILabel andTimerType:MZTimerLabelTypeTimer];
-    [timer3 setCountDownTime:60];
+    [timer setCountDownTime:60];
     [timer start];
  ```
 
