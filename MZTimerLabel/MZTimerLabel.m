@@ -86,29 +86,36 @@
 
 -(void)setStopWatchTime:(NSTimeInterval)time{
     
-    timeUserValue = time;
-    [self setup];
-    [self updateLabel:nil];
+    timeUserValue = (time < 0) ? 0 : time;
+    if(timeUserValue > 0){
+        startCountDate = [[NSDate date] dateByAddingTimeInterval:(timeUserValue<0)?0:-timeUserValue];
+        [self start];
+        [self updateLabel:nil];
+        [self pause];
+    }
 }
 
 -(void)setCountDownTime:(NSTimeInterval)time{
     
     timeUserValue = time;
     timeToCountOff = [date1970 dateByAddingTimeInterval:time];
-    [self setup];
     [self updateLabel:nil];
 }
 
 -(void)setTimeFormat:(NSString *)timeFormat{
     
     _timeFormat = timeFormat;
-    [self setup];
+    if ([_timeFormat length] != 0) {
+        _timeFormat = timeFormat;
+    }
+    [self updateLabel:nil];
 }
 
 #pragma mark - Timer Control Method
 
 
 -(void)start{
+    
     [self setup];
     if(_timer == nil){
         
@@ -121,17 +128,16 @@
         
         if(startCountDate == nil){
             startCountDate = [NSDate date];
+            
+            if (_timerType == MZTimerLabelTypeStopWatch && timeUserValue > 0) {
+                startCountDate = [startCountDate dateByAddingTimeInterval:(timeUserValue<0)?0:-timeUserValue];
+            }
         }
         if(pausedTime != nil){
             NSTimeInterval countedTime = [pausedTime timeIntervalSinceDate:startCountDate];
             startCountDate = [[NSDate date] dateByAddingTimeInterval:-countedTime];
             pausedTime = nil;
         }
-        
-        if (_timerType == MZTimerLabelTypeStopWatch && timeUserValue > 0) {
-            startCountDate = [startCountDate dateByAddingTimeInterval:(timeUserValue<0)?0:-timeUserValue];
-        }
-        
         
         _counting = YES;
         [_timer fire];
@@ -156,6 +162,7 @@
 -(void)reset{
     
     pausedTime = nil;
+    if(_timerType == MZTimerLabelTypeStopWatch) timeUserValue = 0;
     
     if(_counting){
         startCountDate = [NSDate date];
@@ -180,22 +187,23 @@
     }
     
     date1970 = [NSDate dateWithTimeIntervalSince1970:0];
-
     _timeLabel.adjustsFontSizeToFitWidth = YES;
+    
     [self updateLabel:nil];
 }
 
 
 -(void)updateLabel:(NSTimer*)timer{
     
-    
     NSTimeInterval timeDiff = [[[NSDate alloc] init] timeIntervalSinceDate:startCountDate];
-    NSDate *timeToShow = [date1970 dateByAddingTimeInterval:0];
+    NSDate *timeToShow = [NSDate date];
     
     if(_timerType == MZTimerLabelTypeStopWatch){
         
         if (_counting) {
             timeToShow = [date1970 dateByAddingTimeInterval:timeDiff];
+        }else{
+            timeToShow = [date1970 dateByAddingTimeInterval:(!startCountDate)?0:timeDiff];
         }
         
         if([_delegate respondsToSelector:@selector(timerLabel:countingTo:timertype:)]){
@@ -203,6 +211,8 @@
         }
     
     }else{
+        
+        //timer now
         
         if (_counting) {
             
@@ -213,6 +223,7 @@
                         
             if(abs(timeDiff) >= timeUserValue){
                 [self pause];
+                timeToShow = [date1970 dateByAddingTimeInterval:0];
                 pausedTime = nil;
                 startCountDate = nil;
                 
