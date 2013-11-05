@@ -28,6 +28,8 @@
      * REMARKS:initialize without TimerType using MZTimerLabelTypeStopWatch as default
      ********************************************/
     MZTimerLabel *timer1 = [[MZTimerLabel alloc]initWithLabel:_lblTimerExample1];
+    timer1.delegate = self;
+    [timer1 setStopWatchTime:10];
     [timer1 start];
     
     
@@ -52,16 +54,16 @@
      * Count Down Timer
      ********************************************/
     MZTimerLabel *timer3 = [[MZTimerLabel alloc] initWithLabel:_lblTimerExample3 andTimerType:MZTimerLabelTypeTimer];
-    timer3.timeValue = 60; //60seconds (1 min) countdown
+    [timer3 setCountDownTime:15];
     [timer3 start];
-    
+
     
     /*******************************************
      * ------Example 4-----
      * Stopwatch with controls and time format
      * Reveals using implement method belows
      ********************************************/
-    timerExample4 = [[MZTimerLabel alloc] initWithLabel:_lblTimerExample4 andTimerType:MZTimerLabelTypeStopWatch]; // or simply use initWithLabel:
+    timerExample4 = [[MZTimerLabel alloc] initWithLabel:_lblTimerExample4 andTimerType:MZTimerLabelTypeStopWatch];
     timerExample4.timeFormat = @"HH:mm:ss SS";
     
     
@@ -70,28 +72,27 @@
      * Countdown with controls and time format
      * Reveals using implement method belows
      ********************************************/
-    timerExample5 = [[MZTimerLabel alloc] initWithLabel:_lblTimerExample5 andTimerType:MZTimerLabelTypeTimer]; // or simply use initWithLabel:
-    timerExample5.timeValue = 5;
+    timerExample5 = [[MZTimerLabel alloc] initWithLabel:_lblTimerExample5 andTimerType:MZTimerLabelTypeTimer];
+    [timerExample5 setCountDownTime:5];
     
     /*******************************************
      * ------Example 6-----
      * Countdown finish callback with classic delegate way
      * implement - timerLabelEndCountDownTimer:withTime:
      ********************************************/
-    timerExample6 = [[MZTimerLabel alloc] initWithLabel:_lblTimerExample6 andTimerType:MZTimerLabelTypeTimer]; // or simply use initWithLabel:
-    timerExample6.timeValue = 5;
+    timerExample6 = [[MZTimerLabel alloc] initWithLabel:_lblTimerExample6 andTimerType:MZTimerLabelTypeTimer];
+    [timerExample6 setCountDownTime:5];
     timerExample6.delegate = self;
     
     /*******************************************
      * ------Example 7-----
      * Countdown finish callback with convenient callback block
      ********************************************/
-    timerExample7 = [[MZTimerLabel alloc] initWithLabel:_lblTimerExample7 andTimerType:MZTimerLabelTypeTimer]; // or simply use initWithLabel:
-    timerExample7.timeValue = 5;
+    timerExample7 = [[MZTimerLabel alloc] initWithLabel:_lblTimerExample7 andTimerType:MZTimerLabelTypeTimer];
+    [timerExample7 setCountDownTime:5];
     timerExample7.resetTimerAfterFinish = YES;
     timerExample7.timeFormat = @"mm:ss SS";
-    
-    
+        
 }
 
 
@@ -154,7 +155,7 @@
     }
 }
 
--(void)timerLabelEndCountDownTimer:(MZTimerLabel *)timerLabel withTime:(NSTimeInterval)countTime{
+-(void)timerLabel:(MZTimerLabel*)timerLabel finshedCountDownTimerWithTime:(NSTimeInterval)countTime{
     
     NSString *msg = [NSString stringWithFormat:@"Countdown of Example 6 finished!\nTime counted: %i seconds",(int)countTime];
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Alert" message:msg delegate:nil cancelButtonTitle:@"Awesome!" otherButtonTitles:nil];
