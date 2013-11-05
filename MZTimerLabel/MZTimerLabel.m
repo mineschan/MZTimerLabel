@@ -190,21 +190,19 @@
     
     
     NSTimeInterval timeDiff = [[[NSDate alloc] init] timeIntervalSinceDate:startCountDate];
-    NSDate *timeToShow;
+    NSDate *timeToShow = [date1970 dateByAddingTimeInterval:0];
     
     if(_timerType == MZTimerLabelTypeStopWatch){
         
         if (_counting) {
             timeToShow = [date1970 dateByAddingTimeInterval:timeDiff];
-        }else{
-            timeToShow = [date1970 dateByAddingTimeInterval:0];
         }
         
         if([_delegate respondsToSelector:@selector(timerLabel:countingTo:timertype:)]){
             [_delegate timerLabel:self countingTo:timeDiff timertype:_timerType];
         }
     
-    }else if(_timerType == MZTimerLabelTypeTimer){
+    }else{
         
         if (_counting) {
             
@@ -215,7 +213,6 @@
                         
             if(abs(timeDiff) >= timeUserValue){
                 [self pause];
-                timeToShow = [date1970 dateByAddingTimeInterval:0];
                 pausedTime = nil;
                 startCountDate = nil;
                 
