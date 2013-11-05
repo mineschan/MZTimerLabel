@@ -1,8 +1,8 @@
 //
 //  MZTimerLabel.h
-//  Version 0.1
+//  Version 0.2
 //  Created by MineS Chan on 2013-10-16
-//
+//  Updated 2013-11-05
 
 // This code is distributed under the terms and conditions of the MIT license. 
 
@@ -30,25 +30,34 @@
 
 
 /**********************************************
- MZTimerLabel Delegate method for finish of countdown timer
- @optional
-    - timerLabelEndCountDownTimer:withTime:
-**********************************************/
- 
-@class MZTimerLabel;
-@protocol MZTimerLabelDelegate <NSObject>
-@optional
--(void)timerLabelEndCountDownTimer:(MZTimerLabel*)timerLabel withTime:(NSTimeInterval)countTime;
-@end
-
-
-/**********************************************
  MZTimerLabel TimerType Enum
  **********************************************/
 typedef enum{
     MZTimerLabelTypeStopWatch,
     MZTimerLabelTypeTimer
 }MZTimerLabelType;
+
+
+/**********************************************
+ Delegate Methods
+ @optional
+ 
+  - timerLabelEndCountDownTimer:withTime:
+    ** MZTimerLabel Delegate method for finish of countdown timer
+
+ - timerLabelCountingTo:timertype:
+    ** MZTimerLabel Delegate method for monitering the current counting progress
+**********************************************/
+ 
+@class MZTimerLabel;
+@protocol MZTimerLabelDelegate <NSObject>
+@optional
+-(void)timerLabel:(MZTimerLabel*)timerLabel finshedCountDownTimerWithTime:(NSTimeInterval)countTime;
+-(void)timerLabel:(MZTimerLabel*)timerlabel countingTo:(NSTimeInterval)time timertype:(MZTimerLabelType)timerType;
+@end
+
+
+
 
 /**********************************************
  MZTimerLabel Class Defination
@@ -59,7 +68,14 @@ typedef enum{
 #if NS_BLOCKS_AVAILABLE
     void (^endedBlock)(NSTimeInterval);
 #endif
+    
     NSTimeInterval timeUserValue;
+    
+    NSDate *startCountDate;
+    NSDate *pausedTime;
+    
+    NSDate *date1970;
+    NSDate *timeToCountOff;
 }
 
 /*Delegate for finish of countdown timer */
@@ -74,11 +90,8 @@ typedef enum{
 /*Type to choose from stopwatch or timer*/
 @property (assign) MZTimerLabelType timerType;
 
-/*Current countdown/stopwatch time*/
-@property (nonatomic,assign) NSTimeInterval timeValue;
-
 /*is The Timer Running?*/
-@property (assign) BOOL counting;
+@property (assign,readonly) BOOL counting;
 
 /*do you reset the Timer after countdown?*/
 @property (assign) BOOL resetTimerAfterFinish;
@@ -98,6 +111,9 @@ typedef enum{
 -(void)pause;
 -(void)reset;
 
+/*--------Setter methods*/
+-(void)setCountDownTime:(NSTimeInterval)time;
+-(void)setStopWatchTime:(NSTimeInterval)time;
 
 
 @end
