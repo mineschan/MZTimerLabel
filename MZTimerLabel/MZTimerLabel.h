@@ -42,7 +42,7 @@ typedef enum{
  Delegate Methods
  @optional
  
-  - timerLabelEndCountDownTimer:withTime:
+  - timerLabel:finshedCountDownTimerWithTimeWithTime:
     ** MZTimerLabel Delegate method for finish of countdown timer
 
  - timerLabelCountingTo:timertype:

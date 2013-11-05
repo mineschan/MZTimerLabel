@@ -19,7 +19,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    ((UIScrollView *)self.view).contentSize = CGSizeMake(self.view.frame.size.width, 920);
+    
+    NSArray* demoNib = [[NSBundle mainBundle] loadNibNamed:@"DemoView" owner:self options:nil];
+    UIView *demoView = [demoNib lastObject];
+    ((UIScrollView *)self.view).contentSize = CGSizeMake(self.view.frame.size.width, demoView.frame.size.height);
     
     
     /*******************************************
@@ -28,8 +31,6 @@
      * REMARKS:initialize without TimerType using MZTimerLabelTypeStopWatch as default
      ********************************************/
     MZTimerLabel *timer1 = [[MZTimerLabel alloc]initWithLabel:_lblTimerExample1];
-    timer1.delegate = self;
-    [timer1 setStopWatchTime:10];
     [timer1 start];
     
     
@@ -39,13 +40,13 @@
      ********************************************/
     MZTimerLabel *timer2 = [[MZTimerLabel alloc] initWithTimerType:MZTimerLabelTypeStopWatch];
     [self.view addSubview:timer2];
-        //do some styling
+    //do some styling
     timer2.frame = CGRectMake(0, 155, self.view.frame.size.width, 40);
-    timer2.backgroundColor = [UIColor clearColor];
-    timer2.font = [UIFont systemFontOfSize:28.0f];
-    timer2.textColor = [UIColor brownColor];
-    timer2.textAlignment = NSTextAlignmentCenter; //UITextAlignmentCenter is deprecated in iOS 7.0
-        //fire
+    timer2.timeLabel.backgroundColor = [UIColor clearColor];
+    timer2.timeLabel.font = [UIFont systemFontOfSize:28.0f];
+    timer2.timeLabel.textColor = [UIColor brownColor];
+    timer2.timeLabel.textAlignment = NSTextAlignmentCenter; //UITextAlignmentCenter is deprecated in iOS 7.0
+    //fire
     [timer2 start];
     
     
@@ -61,16 +62,16 @@
     /*******************************************
      * ------Example 4-----
      * Stopwatch with controls and time format
-     * Reveals using implement method belows
+     * Adjust starting Value
      ********************************************/
     timerExample4 = [[MZTimerLabel alloc] initWithLabel:_lblTimerExample4 andTimerType:MZTimerLabelTypeStopWatch];
+    [timerExample4 setStopWatchTime:5];
     timerExample4.timeFormat = @"HH:mm:ss SS";
     
     
     /*******************************************
      * ------Example 5-----
      * Countdown with controls and time format
-     * Reveals using implement method belows
      ********************************************/
     timerExample5 = [[MZTimerLabel alloc] initWithLabel:_lblTimerExample5 andTimerType:MZTimerLabelTypeTimer];
     [timerExample5 setCountDownTime:5];
@@ -92,7 +93,13 @@
     [timerExample7 setCountDownTime:5];
     timerExample7.resetTimerAfterFinish = YES;
     timerExample7.timeFormat = @"mm:ss SS";
-        
+    
+    /*******************************************
+     * ------Example 8-----
+     * Stopwatch with progress delegate that will change the text to red color if time counted > 10
+     ********************************************/
+    timerExample8 = [[MZTimerLabel alloc] initWithLabel:_lblTimerExample8];
+    timerExample8.timeFormat = @"mm:ss";
 }
 
 
@@ -179,6 +186,22 @@
     
 }
 
+/*******************************************
+ * Method for Example 7
+ ********************************************/
+
+-(void)timerLabel:(MZTimerLabel *)timerlabel countingTo:(NSTimeInterval)time timertype:(MZTimerLabelType)timerType{
+    
+    if([timerlabel isEqual:timerExample8] && time > 10){
+        timerlabel.timeLabel.textColor = [UIColor redColor];
+    }
+    
+}
+
+- (IBAction)startStopWatchWithProgressDelegate:(id)sender{
+    timerExample8.delegate = self;
+    [timerExample8 start];
+}
 
 
 @end

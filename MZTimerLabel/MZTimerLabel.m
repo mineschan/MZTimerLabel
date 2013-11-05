@@ -87,6 +87,7 @@
 -(void)setStopWatchTime:(NSTimeInterval)time{
     
     timeUserValue = time;
+    [self setup];
     [self updateLabel:nil];
 }
 
@@ -94,7 +95,7 @@
     
     timeUserValue = time;
     timeToCountOff = [date1970 dateByAddingTimeInterval:time];
-    
+    [self setup];
     [self updateLabel:nil];
 }
 
@@ -197,10 +198,19 @@
         }else{
             timeToShow = [date1970 dateByAddingTimeInterval:0];
         }
+        
+        if([_delegate respondsToSelector:@selector(timerLabel:countingTo:timertype:)]){
+            [_delegate timerLabel:self countingTo:timeDiff timertype:_timerType];
+        }
     
     }else if(_timerType == MZTimerLabelTypeTimer){
         
         if (_counting) {
+            
+            if([_delegate respondsToSelector:@selector(timerLabel:countingTo:timertype:)]){
+                NSTimeInterval timeLeft = timeUserValue - timeDiff;
+                [_delegate timerLabel:self countingTo:timeLeft timertype:_timerType];
+            }
                         
             if(abs(timeDiff) >= timeUserValue){
                 [self pause];

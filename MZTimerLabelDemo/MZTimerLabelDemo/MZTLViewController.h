@@ -14,7 +14,7 @@
     MZTimerLabel *timerExample5;
     MZTimerLabel *timerExample6;
     MZTimerLabel *timerExample7;
-
+    MZTimerLabel *timerExample8;
 }
 
 /*Controls for Example 1*/
@@ -50,5 +50,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnStartCountdownExample7;
 - (IBAction)startCountDownWithBlock:(id)sender;
 
-
+/*Controls and Methods for Example 8*/
+@property (weak, nonatomic) IBOutlet UILabel *lblTimerExample8;
+@property (weak, nonatomic) IBOutlet UIButton *btnStartCountdownExample8;
+- (IBAction)startStopWatchWithProgressDelegate:(id)sender;
 @end
