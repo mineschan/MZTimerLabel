@@ -39,13 +39,13 @@ Now the timer will start counting from 60 to 0 ;)
 
 ###Custom Appearance
 
-As MZTimerLabel is a UILabel subclass, you can directly allocate it as a normal UILabel and customize it just like you usual.
+As MZTimerLabel is a UILabel subclass, you can directly allocate it as a normal UILabel and customize `timeLabel` property just like usual.
 
  ```objective-c
     MZTimerLabel *redStopwatch = [[MZTimerLabel alloc] init];
     redStopwatch.frame = CGRectMake(100,50,100,20);
-    redStopwatch.font = [UIFont systemFontOfSize:20.0f];
-    redStopwatch.textColor = [UIColor redColor];
+    redStopwatch.timeLabel.font = [UIFont systemFontOfSize:20.0f];
+    redStopwatch.timeLabel.textColor = [UIColor redColor];
     [self.view addSubview:redStopwatch];
     [redStopwatch start];
  ```
