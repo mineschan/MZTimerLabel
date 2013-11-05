@@ -50,7 +50,7 @@ As MZTimerLabel is a UILabel subclass, you can directly allocate it as a normal 
     [redStopwatch start];
  ```
  
-MZTimerLabel use 00:00:00 (HH:mm:ss) as time format, if you prefer using another format such as including milliseconds.Your can set your time format like below.
+MZTimerLabel use `00:00:00 (HH:mm:ss)` as time format, if you prefer using another format such as including milliseconds.Your can set your time format like below.
 
 `timerExample4.timeFormat = @"HH:mm:ss SS";`
 
