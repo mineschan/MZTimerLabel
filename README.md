@@ -1,6 +1,9 @@
 MZTimerLabel
 ============
 
+<img align="center" src="https://raw.github.com/mineschan/MZTimerLabel/master/MZTimerLabel_Demo.png" alt="ScreenShot" width="300">
+<img align="center" src="https://raw.github.com/mineschan/MZTimerLabel/master/MZTimerLabel_Demo2.png" alt="ScreenShot2" width="300">
+
 ###Purpose
 
 MZTimerLabel is a UILabel subclass, which is a handy way to use UILabel as a countdown timer or stopwatch just like that in Apple Clock App with just __2 lines of code__. MZTimerLabel also provides delegate method for you to define the action when the timer finished.
