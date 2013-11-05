@@ -117,6 +117,7 @@
         }else{
             _timer = [NSTimer scheduledTimerWithTimeInterval:kDefaultFireIntervalNormal target:self selector:@selector(updateLabel:) userInfo:nil repeats:YES];
         }
+        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
         
         if(startCountDate == nil){
             startCountDate = [NSDate date];
