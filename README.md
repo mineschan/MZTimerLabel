@@ -116,3 +116,7 @@ This code is distributed under the terms and conditions of the [MIT license](LIC
 2. Better performanc.
 3. __Your suggestions!:D__
 
+### Donations
+
+[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=mineschan%40gmail%2ecom&lc=US&item_name=mineschan&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest)
+
