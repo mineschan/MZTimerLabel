@@ -86,7 +86,7 @@ First, set the delegate of the timer label.
 
 `timer.delegate = self;`
 
-And then implement the protocol in your dedicated class
+And then implement `MZTimerLabelDelegate` protocol in your dedicated class
 
 `@interface ViewController : UIViewController<MZTimerLabelDelegate>`
 
@@ -122,8 +122,8 @@ This code is distributed under the terms and conditions of the [MIT license](LIC
 
 ### What's coming up next?
 
-1. Submit to CocaPods
-2. Better performanc.
+1. ~~Submit to CocaPods~~
+2. Better performance.
 3. __Your suggestions!:D__
 
 ### Donations
