@@ -18,10 +18,17 @@ _Remark: This is my first iOS plugin project on github, please accept my apologi
 
 ###Installations
 
-*Manual*
+####Manual
 
 1. Download or clone MZTimerLabel, add `MZTimerLabel.h` and `MZTimerLabel.m` souce files into your project.
 2. `#import "MZTimerLabel.h"` whereever you need it.
+3. 
+
+####CocoaPods
+
+(Unformilar with [CocoaPods](http://cocoapods.org/) yet? It's a dependency management tool for iOS and Mac, check it out!)
+
+1. Add `pod 'MZTimerLabel', '~> 0.1'` to your podfiles
 
 ###Easy Example
 
