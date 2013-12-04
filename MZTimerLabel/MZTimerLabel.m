@@ -1,6 +1,6 @@
 //
 //  MZTimerLabel.m
-//  Version 0.2
+//  Version 0.2.1
 //  Created by MineS Chan on 2013-10-16
 //  Updated 2013-11-05
 
@@ -184,10 +184,18 @@
     
     if(_timeLabel == nil){
         _timeLabel = self;
+        _timeLabel.adjustsFontSizeToFitWidth = YES;
     }
     
-    date1970 = [NSDate dateWithTimeIntervalSince1970:0];
-    _timeLabel.adjustsFontSizeToFitWidth = YES;
+    if(dateFormatter == nil){
+        dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:_timeFormat];
+        [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    }
+    
+    if (date1970 == nil) {
+        date1970 = [NSDate dateWithTimeIntervalSince1970:0];
+    }
     
     [self updateLabel:nil];
 }
@@ -249,10 +257,7 @@
             timeToShow = timeToCountOff;
         }
     }
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:_timeFormat];
-    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+
     NSString *strDate = [dateFormatter stringFromDate:timeToShow];
     _timeLabel.text = strDate;
     

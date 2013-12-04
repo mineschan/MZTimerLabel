@@ -1,6 +1,6 @@
 //
 //  MZTimerLabel.h
-//  Version 0.2
+//  Version 0.2.1
 //  Created by MineS Chan on 2013-10-16
 //  Updated 2013-11-05
 
@@ -36,7 +36,6 @@ typedef enum{
     MZTimerLabelTypeStopWatch,
     MZTimerLabelTypeTimer
 }MZTimerLabelType;
-
 
 /**********************************************
  Delegate Methods
@@ -76,6 +75,7 @@ typedef enum{
     
     NSDate *date1970;
     NSDate *timeToCountOff;
+    NSDateFormatter *dateFormatter;
 }
 
 /*Delegate for finish of countdown timer */
