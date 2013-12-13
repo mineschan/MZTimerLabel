@@ -82,6 +82,17 @@
     return self;
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+	self = [super initWithCoder:aDecoder];
+	if (self) {
+		_timeLabel = self;
+		_timerType = MZTimerLabelTypeStopWatch;
+		[self setup];
+	}
+	return self;
+}
+
 #pragma mark - Getter and Setter Method
 
 -(void)setStopWatchTime:(NSTimeInterval)time{
@@ -107,6 +118,9 @@
     _timeFormat = timeFormat;
     if ([_timeFormat length] != 0) {
         _timeFormat = timeFormat;
+        dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:_timeFormat];
+        [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
     }
     [self updateLabel:nil];
 }
