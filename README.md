@@ -128,5 +128,5 @@ This code is distributed under the terms and conditions of the [MIT license](LIC
 
 ### Donations
 
-[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=mineschan%40gmail%2ecom&lc=US&item_name=mineschan&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest)
+[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/hk/cgi-bin/webscr?cmd=_flow&SESSION=7kbCkfBlNfRFeELE0Sf_M0zirSMf2i-QwDO__seqKccp_qXfRHxa6-QYNuW&dispatch=50a222a57771920b6a3d7b606239e4d529b525e0b7e69bf0224adecfb0124e9b61f737ba21b081986471f9b93cfa01e00b63629be0164db1)
 
