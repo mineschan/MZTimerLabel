@@ -3,7 +3,7 @@
 //  MZTimerLabelDemo
 //
 //  Created by mines.chan on 16/10/13.
-//  Copyright (c) 2013 MineS Chan. All rights reserved.
+//  Copyright (c) 2014 MineS Chan. All rights reserved.
 //
 
 #import "MZTLViewController.h"
@@ -27,21 +27,19 @@
     
     /*******************************************
      * ------Example 1-----
-     * Use timer on existing and styled UILabel, simplest usage. 
+     * Use timer on existing and styled MZTimerLabel from Storyboard/Xib, simplest usage.
      * REMARKS:initialize without TimerType using MZTimerLabelTypeStopWatch as default
      ********************************************/
-    MZTimerLabel *timer1 = [[MZTimerLabel alloc]initWithLabel:_lblTimerExample1];
-    [timer1 start];
-    
+    [_lblTimerExample1 start];
     
     /*******************************************
      * ------Example 2-----
-     * Using itselfs as the label and set differene time format
+     * Using MZTimerLabel instance only and set differene time format
      ********************************************/
-    MZTimerLabel *timer2 = [[MZTimerLabel alloc] initWithTimerType:MZTimerLabelTypeStopWatch];
+    MZTimerLabel *timer2 = [[MZTimerLabel alloc] initWithFrame:CGRectMake(0, 155, self.view.frame.size.width, 40)];
+    timer2.timerType = MZTimerLabelTypeStopWatch;
     [self.view addSubview:timer2];
     //do some styling
-    timer2.frame = CGRectMake(0, 155, self.view.frame.size.width, 40);
     timer2.timeLabel.backgroundColor = [UIColor clearColor];
     timer2.timeLabel.font = [UIFont systemFontOfSize:28.0f];
     timer2.timeLabel.textColor = [UIColor brownColor];
@@ -55,7 +53,7 @@
      * Count Down Timer
      ********************************************/
     MZTimerLabel *timer3 = [[MZTimerLabel alloc] initWithLabel:_lblTimerExample3 andTimerType:MZTimerLabelTypeTimer];
-    [timer3 setCountDownTime:15];
+    [timer3 setCountDownTime:15]; //** Or you can use [timer3 setCountDownToDate:aDate];
     [timer3 start];
 
     
@@ -74,7 +72,8 @@
      * Countdown with controls and time format
      ********************************************/
     timerExample5 = [[MZTimerLabel alloc] initWithLabel:_lblTimerExample5 andTimerType:MZTimerLabelTypeTimer];
-    [timerExample5 setCountDownTime:5];
+    [timerExample5 setCountDownTime:10];
+
     
     /*******************************************
      * ------Example 6-----
@@ -100,10 +99,20 @@
      ********************************************/
     timerExample8 = [[MZTimerLabel alloc] initWithLabel:_lblTimerExample8];
     timerExample8.timeFormat = @"mm:ss";
+    
+    
+    /*******************************************
+     * ------Example 9-----
+     * Use delegate to determine what text to be shown in corresponding time
+     * This one display days as addtional hours, see implementation at line number 218
+     ********************************************/
+   
+    timerExample9 = [[MZTimerLabel alloc] initWithLabel:_lblTimerExample9 andTimerType:MZTimerLabelTypeTimer];
+    [timerExample9 setCountDownTime:3600*24*2];
+    timerExample9.delegate = self;
+    [timerExample9 start];
+
 }
-
-
-
 
 /*******************************************
  * Method for Example 4
@@ -162,7 +171,7 @@
     }
 }
 
--(void)timerLabel:(MZTimerLabel*)timerLabel finshedCountDownTimerWithTime:(NSTimeInterval)countTime{
+- (void)timerLabel:(MZTimerLabel*)timerLabel finshedCountDownTimerWithTime:(NSTimeInterval)countTime{
     
     NSString *msg = [NSString stringWithFormat:@"Countdown of Example 6 finished!\nTime counted: %i seconds",(int)countTime];
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Alert" message:msg delegate:nil cancelButtonTitle:@"Awesome!" otherButtonTitles:nil];
@@ -187,10 +196,10 @@
 }
 
 /*******************************************
- * Method for Example 7
+ * Method for Example 8
  ********************************************/
 
--(void)timerLabel:(MZTimerLabel *)timerlabel countingTo:(NSTimeInterval)time timertype:(MZTimerLabelType)timerType{
+- (void)timerLabel:(MZTimerLabel *)timerlabel countingTo:(NSTimeInterval)time timertype:(MZTimerLabelType)timerType{
     
     if([timerlabel isEqual:timerExample8] && time > 10){
         timerlabel.timeLabel.textColor = [UIColor redColor];
@@ -201,6 +210,22 @@
 - (IBAction)startStopWatchWithProgressDelegate:(id)sender{
     timerExample8.delegate = self;
     [timerExample8 start];
+}
+
+/*******************************************
+ * Method for Example 9
+ ********************************************/
+
+- (NSString*)timerLabel:(MZTimerLabel *)timerLabel customTextToDisplayAtTime:(NSTimeInterval)time
+{
+    if([timerLabel isEqual:timerExample9]){
+        int second = (int)time  % 60;
+        int minute = ((int)time / 60) % 60;
+        int hours = time / 3600;
+        return [NSString stringWithFormat:@"%02dh %02dm %02ds",hours,minute,second];
+    }
+    else
+    return nil;
 }
 
 

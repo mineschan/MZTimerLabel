@@ -3,7 +3,7 @@
 //  MZTimerLabelDemo
 //
 //  Created by mines.chan on 16/10/13.
-//  Copyright (c) 2013 MineS Chan. All rights reserved.
+//  Copyright (c) 2014 MineS Chan. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -15,10 +15,11 @@
     MZTimerLabel *timerExample6;
     MZTimerLabel *timerExample7;
     MZTimerLabel *timerExample8;
+    MZTimerLabel *timerExample9;
 }
 
 /*Controls for Example 1*/
-@property (weak, nonatomic) IBOutlet UILabel *lblTimerExample1;
+@property (weak, nonatomic) IBOutlet MZTimerLabel *lblTimerExample1;
 
 
 /*Controls for Example 3*/
@@ -54,4 +55,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblTimerExample8;
 @property (weak, nonatomic) IBOutlet UIButton *btnStartCountdownExample8;
 - (IBAction)startStopWatchWithProgressDelegate:(id)sender;
+
+/*Controls and Methods for Example 9*/
+@property (weak, nonatomic) IBOutlet UILabel *lblTimerExample9;
+
 @end
