@@ -22,13 +22,12 @@ _Remark: This is my first iOS plugin project on github, please accept my apologi
 
 1. Download or clone MZTimerLabel, add `MZTimerLabel.h` and `MZTimerLabel.m` souce files into your project.
 2. `#import "MZTimerLabel.h"` whereever you need it.
-3. 
 
 ####CocoaPods
 
 (Unformilar with [CocoaPods](http://cocoapods.org/) yet? It's a dependency management tool for iOS and Mac, check it out!)
 
-1. Add `pod 'MZTimerLabel', '~> 0.1'` to your podfiles
+1. Add `pod 'MZTimerLabel', '~> 0.2.1'` to your podfiles
 
 ###Easy Example
 
@@ -60,7 +59,7 @@ As MZTimerLabel is a UILabel subclass, you can directly allocate it as a normal 
     [redStopwatch start];
  ```
  
-MZTimerLabel use `00:00:00 (HH:mm:ss)` as time format, if you prefer using another format such as including milliseconds.Your can set your time format like below.
+MZTimerLabel uses `00:00:00 (HH:mm:ss)` as time format, if you prefer using another format such as including milliseconds.Your can set your time format like below.
 
 `timerExample4.timeFormat = @"HH:mm:ss SS";`
 
@@ -68,7 +67,7 @@ MZTimerLabel use `00:00:00 (HH:mm:ss)` as time format, if you prefer using anoth
  
 ###Control the timer
 
-You can start,pause,reset your timer with your custom control, set your controls up and call these methods:
+You can start,pause,reset your timer with your custom control, set your control up and call these methods:
 
 * `-(void)start;`
 * `-(void)pause;`
