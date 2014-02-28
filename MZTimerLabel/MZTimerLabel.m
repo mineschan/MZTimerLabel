@@ -104,10 +104,8 @@
     
     timeUserValue = (time < 0) ? 0 : time;
     if(timeUserValue > 0){
-        startCountDate = [[NSDate date] dateByAddingTimeInterval:(timeUserValue<0)?0:-timeUserValue];
-        [self start];
+        startCountDate = [[NSDate date] dateByAddingTimeInterval:-timeUserValue];
         [self updateLabel];
-        [self pause];
     }
 }
 
