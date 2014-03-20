@@ -152,6 +152,7 @@
     
     if (_dateFormatter == nil) {
         _dateFormatter = [[NSDateFormatter alloc] init];
+        _dateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_GB"];
         [_dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
         _dateFormatter.dateFormat = self.timeFormat;
     }
