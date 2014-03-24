@@ -53,7 +53,7 @@
      * Count Down Timer
      ********************************************/
     MZTimerLabel *timer3 = [[MZTimerLabel alloc] initWithLabel:_lblTimerExample3 andTimerType:MZTimerLabelTypeTimer];
-    [timer3 setCountDownTime:15]; //** Or you can use [timer3 setCountDownToDate:aDate];
+    [timer3 setCountDownTime:30*60]; //** Or you can use [timer3 setCountDownToDate:aDate];
     [timer3 start];
 
     
@@ -96,6 +96,7 @@
     /*******************************************
      * ------Example 8-----
      * Stopwatch with progress delegate that will change the text to red color if time counted > 10
+     * Button to add 2 seconds each time you press.
      ********************************************/
     timerExample8 = [[MZTimerLabel alloc] initWithLabel:_lblTimerExample8];
     timerExample8.timeFormat = @"mm:ss";
@@ -211,6 +212,12 @@
     timerExample8.delegate = self;
     [timerExample8 start];
 }
+
+- (IBAction)add2SecondToCountingObject
+{
+    [timerExample8 addTimeCountedByTime:2];
+}
+
 
 /*******************************************
  * Method for Example 9

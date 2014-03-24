@@ -105,14 +105,15 @@
     timeUserValue = (time < 0) ? 0 : time;
     if(timeUserValue > 0){
         startCountDate = [[NSDate date] dateByAddingTimeInterval:-timeUserValue];
+        pausedTime = [NSDate date];
         [self updateLabel];
     }
 }
 
 - (void)setCountDownTime:(NSTimeInterval)time{
     
-    timeUserValue = time;
-    timeToCountOff = [date1970 dateByAddingTimeInterval:time];
+    timeUserValue = (time < 0)? 0 : time;
+    timeToCountOff = [date1970 dateByAddingTimeInterval:timeUserValue];
     [self updateLabel];
 }
 
@@ -164,6 +165,24 @@
         _timeLabel = self;
     }
     return _timeLabel;
+}
+
+
+-(void)addTimeCountedByTime:(NSTimeInterval)timeToAdd
+{
+    startCountDate = [startCountDate dateByAddingTimeInterval:-timeToAdd];
+}
+
+
+- (NSTimeInterval)getTimeCounted
+{
+    NSTimeInterval countedTime = [[NSDate date] timeIntervalSinceDate:startCountDate];
+    
+    if(pausedTime != nil){
+        NSTimeInterval pauseCountedTime = [[NSDate date] timeIntervalSinceDate:pausedTime];
+        countedTime -= pauseCountedTime;
+    }
+    return countedTime;
 }
 
 #pragma mark - Timer Control Method
@@ -255,7 +274,7 @@
                 [_delegate timerLabel:self countingTo:timeLeft timertype:_timerType];
             }
                         
-            if(abs(timeDiff) >= timeUserValue){
+            if(timeDiff >= timeUserValue){
                 [self pause];
                 timeToShow = [date1970 dateByAddingTimeInterval:0];
                 pausedTime = nil;

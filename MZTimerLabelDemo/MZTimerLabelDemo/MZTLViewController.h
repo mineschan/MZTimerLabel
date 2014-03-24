@@ -54,7 +54,9 @@
 /*Controls and Methods for Example 8*/
 @property (weak, nonatomic) IBOutlet UILabel *lblTimerExample8;
 @property (weak, nonatomic) IBOutlet UIButton *btnStartCountdownExample8;
+@property (weak, nonatomic) IBOutlet UIButton *btnAdd2SrcExample8;
 - (IBAction)startStopWatchWithProgressDelegate:(id)sender;
+- (IBAction)add2SecondToCountingObject;
 
 /*Controls and Methods for Example 9*/
 @property (weak, nonatomic) IBOutlet UILabel *lblTimerExample9;

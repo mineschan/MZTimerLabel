@@ -1,6 +1,6 @@
 //
 //  MZTimerLabel.h
-//  Version 0.3
+//  Version 0.4
 //  Created by MineS Chan on 2013-10-16
 //  Updated 2014-01-24
 
@@ -102,6 +102,15 @@ typedef enum{
 -(void)setCountDownTime:(NSTimeInterval)time;
 -(void)setStopWatchTime:(NSTimeInterval)time;
 -(void)setCountDownToDate:(NSDate*)date;
+
+-(void)addTimeCountedByTime:(NSTimeInterval)timeToAdd;
+
+/*--------Getter methods*/
+- (NSTimeInterval)getTimeCounted;
+
+
+
+
 
 
 @end
