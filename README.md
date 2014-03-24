@@ -69,9 +69,20 @@ MZTimerLabel uses `00:00:00 (HH:mm:ss)` as time format, if you prefer using anot
 
 You can start,pause,reset your timer with your custom control, set your control up and call these methods:
 
-* `-(void)start;`
-* `-(void)pause;`
-* `-(void)reset;`
+```
+-(void)start;
+-(void)pause;
+-(void)reset;
+```
+
+And you control the time at the begining or during runtime with these methods
+
+```
+-(void)setCountDownTime:(NSTimeInterval)time;
+-(void)setStopWatchTime:(NSTimeInterval)time;
+-(void)setCountDownToDate:(NSDate*)date;
+-(void)addTimeCountedByTime:(NSTimeInterval)timeToAdd;
+```
 
 
 
@@ -122,7 +133,7 @@ This code is distributed under the terms and conditions of the [MIT license](LIC
 ### What's coming up next?
 
 1. ~~Submit to CocaPods~~
-2. Better performance.
+2. ~~~Better performance.~~~
 3. __Your suggestions!:D__
 
 ### Donations
