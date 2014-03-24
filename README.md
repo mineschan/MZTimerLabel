@@ -133,7 +133,7 @@ This code is distributed under the terms and conditions of the [MIT license](LIC
 ### What's coming up next?
 
 1. ~~Submit to CocaPods~~
-2. ~~~Better performance.~~~
+2. ~~Better performance.~~
 3. __Your suggestions!:D__
 
 ### Donations
