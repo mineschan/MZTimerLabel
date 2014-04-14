@@ -192,6 +192,11 @@
 
 -(void)start{
     
+    if (_timer) {
+        [_timer invalidate];
+        _timer = nil;
+    }
+    
     if ([self.timeFormat rangeOfString:@"SS"].location != NSNotFound) {
         _timer = [NSTimer scheduledTimerWithTimeInterval:kDefaultFireIntervalHighUse target:self selector:@selector(updateLabel) userInfo:nil repeats:YES];
     }else{
