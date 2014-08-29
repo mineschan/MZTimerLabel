@@ -25,7 +25,7 @@ _Remark: This is my first iOS plugin project on github, please accept my apologi
 
 ####CocoaPods
 
-(Unformilar with [CocoaPods](http://cocoapods.org/) yet? It's a dependency management tool for iOS and Mac, check it out!)
+(Unfamiliar with [CocoaPods](http://cocoapods.org/) yet? It's a dependency management tool for iOS and Mac, check it out!)
 
 1. Add `pod 'MZTimerLabel', '~> 0.4.1'` to your podfiles
 
