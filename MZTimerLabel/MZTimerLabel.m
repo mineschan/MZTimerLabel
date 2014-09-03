@@ -229,10 +229,12 @@
 #endif
     
 -(void)pause{
-    [_timer invalidate];
-    _timer = nil;
-    _counting = NO;
-    pausedTime = [NSDate date];
+	if(_counting){
+	    [_timer invalidate];
+	    _timer = nil;
+	    _counting = NO;
+	    pausedTime = [NSDate date];		
+	}
 }
 
 -(void)reset{
