@@ -171,7 +171,7 @@
 
 -(void)addTimeCountedByTime:(NSTimeInterval)timeToAdd
 {
-    startCountDate = [startCountDate dateByAddingTimeInterval:-timeToAdd];
+    [self setCountDownTime:timeToAdd + timeUserValue];
     [self updateLabel];
 }
 
