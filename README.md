@@ -8,7 +8,7 @@ MZTimerLabel
 
 MZTimerLabel is a UILabel subclass, which is a handy way to use UILabel as a countdown timer or stopwatch just like that in Apple Clock App with just __2 lines of code__. MZTimerLabel also provides delegate method for you to define the action when the timer finished.
 
-Auther: [MineS Chan](https://github.com/mineschan/)
+Author: [MineS Chan](https://github.com/mineschan/)
 
 _Remark: This is my first iOS plugin project on github, please accept my apologize if any bad coding._
 
@@ -20,7 +20,7 @@ _Remark: This is my first iOS plugin project on github, please accept my apologi
 
 ####Manual
 
-1. Download or clone MZTimerLabel, add `MZTimerLabel.h` and `MZTimerLabel.m` souce files into your project.
+1. Download or clone MZTimerLabel, add `MZTimerLabel.h` and `MZTimerLabel.m` source files into your project.
 2. `#import "MZTimerLabel.h"` whereever you need it.
 
 ####CocoaPods
@@ -117,7 +117,7 @@ Finally, implement the delegate method `timerLabel:finshedCountDownTimerWithTime
     MZTimerLabel *timer = [[MZTimerLabel alloc] initWithLabel:aUILabel andTimerType:MZTimerLabelTypeTimer];
     [timer3 setCountDownTime:60]; 
     [timer startWithEndingBlock:^(NSTimeInterval countTime) {
-        //oh my god it's awesome!!
+        //oh my gosh, it's awesome!!
     }];
  
  ```
