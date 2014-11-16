@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
 
   s.platform     = :ios, '5.0'
 
-  s.source       = { :git => "https://github.com/mineschan/MZTimerLabel.git", :tag => "0.4.4" }
+  s.source       = { :git => "https://github.com/mineschan/MZTimerLabel.git", :tag => s.version.to_s }
 
   s.source_files  = 'Classes', 'MZTimerLabel/*.{h,m}'
   s.exclude_files = 'Classes/Exclude'
