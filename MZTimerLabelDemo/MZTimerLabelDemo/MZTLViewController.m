@@ -52,9 +52,9 @@
      * ------Example 3-----
      * Count Down Timer
      ********************************************/
-    MZTimerLabel *timer3 = [[MZTimerLabel alloc] initWithLabel:_lblTimerExample3 andTimerType:MZTimerLabelTypeTimer];
-    [timer3 setCountDownTime:30*60]; //** Or you can use [timer3 setCountDownToDate:aDate];
-    [timer3 start];
+    timerExample3 = [[MZTimerLabel alloc] initWithLabel:_lblTimerExample3 andTimerType:MZTimerLabelTypeTimer];
+    [timerExample3 setCountDownTime:30*60]; //** Or you can use [timer3 setCountDownToDate:aDate];
+    [timerExample3 start];
 
     
     /*******************************************
@@ -63,7 +63,6 @@
      * Adjust starting Value
      ********************************************/
     timerExample4 = [[MZTimerLabel alloc] initWithLabel:_lblTimerExample4 andTimerType:MZTimerLabelTypeStopWatch];
-    [timerExample4 setStopWatchTime:5];
     timerExample4.timeFormat = @"HH:mm:ss SS";
     
     
@@ -105,14 +104,66 @@
     /*******************************************
      * ------Example 9-----
      * Use delegate to determine what text to be shown in corresponding time
-     * This one display days as addtional hours, see implementation at line number 218
+     * This one display days as addtional hours, see implementation below
      ********************************************/
    
     timerExample9 = [[MZTimerLabel alloc] initWithLabel:_lblTimerExample9 andTimerType:MZTimerLabelTypeTimer];
     [timerExample9 setCountDownTime:3600*24*2];
     timerExample9.delegate = self;
     [timerExample9 start];
+    
+    /*******************************************
+     * ------Example 10-----
+     * Modify current couting timer of a stopwatch, see implemention below
+     ********************************************/
+    
+    timerExample10 = [[MZTimerLabel alloc] initWithLabel:_lblTimerExample10 andTimerType:MZTimerLabelTypeStopWatch];
+    [timerExample10 start];
+    
+    /*******************************************
+     * ------Example 11-----
+     * Modify current couting timer of a countdown timer, see implemention below
+     ********************************************/
+    
+    timerExample11 = [[MZTimerLabel alloc] initWithLabel:_lblTimerExample11 andTimerType:MZTimerLabelTypeTimer];
+    [timerExample11 setCountDownTime:3600];
+    [timerExample11 start];
+    
+    /*******************************************
+     * ------Example 12-----
+     * You may need more than 23 hours display in some situation, like if you prefer showing 48 hours rather than 2days.
+     * As MZTimerLabel uses NSDateFormatter to convert the time difference to String, there is no format string support 
+     * this purpose, so you may implement custom display text demo om example 9. Or set the property `shouldCountBeyondHHLimit` of
+     * MZTimerLabel. 
+     * REMARKS: Only `HH` and `H` in the format string will be affected. Other hour format like "h", "k", "K" remain their own behaviour.
+     ********************************************/
+    
+    timerExample12 = [[MZTimerLabel alloc] initWithLabel:_lblTimerExample12 andTimerType:MZTimerLabelTypeStopWatch];
+    [timerExample12 setStopWatchTime:86395];
+    [timerExample12 setShouldCountBeyondHHLimit:YES];
 
+}
+
+/*******************************************
+ * Method for Example 3
+ ********************************************/
+
+- (IBAction)getTimerCounted:(id)sender {
+    
+    NSTimeInterval timeCounted = [timerExample3 getTimeCounted];
+    
+    NSString *msg = [NSString stringWithFormat:@"Timer of Example 3 counted: %f seconds",timeCounted];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Alert" message:msg delegate:nil cancelButtonTitle:@"Awesome!" otherButtonTitles:nil];
+    [alertView show];
+}
+
+- (IBAction)getTimerRemain:(id)sender {
+    
+    NSTimeInterval timeRemain = [timerExample3 getTimeRemaining];
+    
+    NSString *msg = [NSString stringWithFormat:@"Timer of Example 3 remaining: %f seconds",timeRemain];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Alert" message:msg delegate:nil cancelButtonTitle:@"Awesome!" otherButtonTitles:nil];
+    [alertView show];
 }
 
 /*******************************************
@@ -186,12 +237,23 @@
 - (IBAction)startCountDownWithBlock:(id)sender {
     
     if(![timerExample7 counting]){
+        
         [timerExample7 startWithEndingBlock:^(NSTimeInterval countTime) {
             
             NSString *msg = [NSString stringWithFormat:@"Countdown of Example 7 finished!\nTime counted: %i seconds",(int)countTime];
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Alert" message:msg delegate:nil cancelButtonTitle:@"Awesome!" otherButtonTitles:nil];
             [alertView show];
         }];
+        
+        //or you can do this
+        /*
+        timerExample7.endedBlock = ^(NSTimeInterval countTime) {
+            NSString *msg = [NSString stringWithFormat:@"Countdown of Example 7 finished!\nTime counted: %i seconds",(int)countTime];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Alert" message:msg delegate:nil cancelButtonTitle:@"Awesome!" otherButtonTitles:nil];
+            [alertView show];
+        };
+        [timerExample7 start];
+         */
     }
     
 }
@@ -200,6 +262,7 @@
  * Method for Example 8
  ********************************************/
 
+/*****THIS IS MZTimerLabel DELEGATE Method*****/
 - (void)timerLabel:(MZTimerLabel *)timerlabel countingTo:(NSTimeInterval)time timertype:(MZTimerLabelType)timerType{
     
     if([timerlabel isEqual:timerExample8] && time > 10){
@@ -213,16 +276,11 @@
     [timerExample8 start];
 }
 
-- (IBAction)add2SecondToCountingObject
-{
-    [timerExample8 addTimeCountedByTime:2];
-}
-
-
 /*******************************************
- * Method for Example 9
+ * Delegate Method for Example 9
  ********************************************/
 
+/*****THIS IS MZTimerLabel DELEGATE Method*****/
 - (NSString*)timerLabel:(MZTimerLabel *)timerLabel customTextToDisplayAtTime:(NSTimeInterval)time
 {
     if([timerLabel isEqual:timerExample9]){
@@ -233,6 +291,42 @@
     }
     else
     return nil;
+}
+
+/*******************************************
+ * Method for Example 10
+ ********************************************/
+
+- (IBAction)add2SecondToCountingStopwatch:(id)sender {
+    [timerExample10 addTimeCountedByTime:2];
+}
+
+- (IBAction)minus2SecondToCountingStopwatch:(id)sender {
+    [timerExample10 addTimeCountedByTime:-2];
+}
+
+/*******************************************
+ * Method for Example 11
+ ********************************************/
+
+- (IBAction)add2SecondToCountingTimer:(id)sender {
+    [timerExample11 addTimeCountedByTime:2];
+}
+
+- (IBAction)minus2SecondToCountingTimer:(id)sender {
+    [timerExample11 addTimeCountedByTime:-2];
+}
+
+/*******************************************
+ * Method for Example 12
+ ********************************************/
+
+- (IBAction)startStopwatchBeyond23Hours:(id)sender {
+    [timerExample12 start];
+}
+
+- (IBAction)toggleStopwatchBeyond24Hours:(id)sender {
+    [timerExample12 setShouldCountBeyondHHLimit:!timerExample12.shouldCountBeyondHHLimit];
 }
 
 

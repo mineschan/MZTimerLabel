@@ -1,8 +1,8 @@
 //
 //  MZTimerLabel.h
-//  Version 0.4.1
+//  Version 0.5
 //  Created by MineS Chan on 2013-10-16
-//  Updated 2014-03-27
+//  Updated 2014-12-04
 
 // This code is distributed under the terms and conditions of the MIT license. 
 
@@ -77,11 +77,18 @@ typedef enum{
 /*Type to choose from stopwatch or timer*/
 @property (assign) MZTimerLabelType timerType;
 
-/*is The Timer Running?*/
+/*Is The Timer Running?*/
 @property (assign,readonly) BOOL counting;
 
-/*do you reset the Timer after countdown?*/
+/*Do you want to reset the Timer after countdown?*/
 @property (assign) BOOL resetTimerAfterFinish;
+
+/*Do you want the timer to count beyond the HH limit from 0-23 e.g. 25:23:12 (HH:mm:ss) */
+@property (assign) BOOL shouldCountBeyondHHLimit;
+
+#if NS_BLOCKS_AVAILABLE
+@property (copy) void (^endedBlock)(NSTimeInterval);
+#endif
 
 
 /*--------Init methods to choose*/
@@ -107,6 +114,7 @@ typedef enum{
 
 /*--------Getter methods*/
 - (NSTimeInterval)getTimeCounted;
+- (NSTimeInterval)getTimeRemaining;
 
 
 

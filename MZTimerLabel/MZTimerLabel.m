@@ -1,8 +1,8 @@
 //
 //  MZTimerLabel.h
-//  Version 0.4.1
+//  Version 0.5
 //  Created by MineS Chan on 2013-10-16
-//  Updated 2014-03-27
+//  Updated 2014-12-04
 
 // This code is distributed under the terms and conditions of the MIT license.
 
@@ -30,15 +30,13 @@
 
 
 #define kDefaultTimeFormat  @"HH:mm:ss"
+#define kHourFormatReplace  @"!!!*"
 #define kDefaultFireIntervalNormal  0.1
 #define kDefaultFireIntervalHighUse  0.02
 #define kDefaultTimerType MZTimerLabelTypeStopWatch
 
 @interface MZTimerLabel(){
     
-#if NS_BLOCKS_AVAILABLE
-    void (^endedBlock)(NSTimeInterval);
-#endif
     NSTimeInterval timeUserValue;
     NSDate *startCountDate;
     NSDate *pausedTime;
@@ -171,13 +169,24 @@
 
 -(void)addTimeCountedByTime:(NSTimeInterval)timeToAdd
 {
-    [self setCountDownTime:timeToAdd + timeUserValue];
+    if (_timerType == MZTimerLabelTypeTimer) {
+        [self setCountDownTime:timeToAdd + timeUserValue];
+    }else if (_timerType == MZTimerLabelTypeStopWatch) {
+        NSDate *newStartDate = [startCountDate dateByAddingTimeInterval:-timeToAdd];
+        if([[NSDate date] timeIntervalSinceDate:newStartDate] <= 0) {
+            //prevent less than 0
+            startCountDate = [NSDate date];
+        }else{
+            startCountDate = newStartDate;
+        }
+    }
     [self updateLabel];
 }
 
 
 - (NSTimeInterval)getTimeCounted
 {
+    if(!startCountDate) return 0;
     NSTimeInterval countedTime = [[NSDate date] timeIntervalSinceDate:startCountDate];
     
     if(pausedTime != nil){
@@ -185,6 +194,20 @@
         countedTime -= pauseCountedTime;
     }
     return countedTime;
+}
+
+- (NSTimeInterval)getTimeRemaining {
+    
+    if (_timerType == MZTimerLabelTypeTimer) {
+        return timeUserValue - [self getTimeCounted];
+    }
+    
+    return 0;
+}
+
+- (void)setShouldCountBeyondHHLimit:(BOOL)shouldCountBeyondHHLimit {
+    _shouldCountBeyondHHLimit = shouldCountBeyondHHLimit;
+    [self updateLabel];
 }
 
 #pragma mark - Timer Control Method
@@ -224,7 +247,7 @@
 #if NS_BLOCKS_AVAILABLE
 -(void)startWithEndingBlock:(void(^)(NSTimeInterval))end{
     [self start];
-    endedBlock = end;
+    self.endedBlock = end;
 }
 #endif
     
@@ -254,8 +277,8 @@
 
 
 -(void)updateLabel{
-    
-    NSTimeInterval timeDiff = [[[NSDate alloc] init] timeIntervalSinceDate:startCountDate];
+
+    NSTimeInterval timeDiff = [[NSDate date] timeIntervalSinceDate:startCountDate];
     NSDate *timeToShow = [NSDate date];
     
     /***MZTimerLabelTypeStopWatch Logic***/
@@ -294,8 +317,8 @@
                 }
                 
 #if NS_BLOCKS_AVAILABLE
-                if(endedBlock != nil){
-                    endedBlock(timeUserValue);
+                if(_endedBlock != nil){
+                    _endedBlock(timeUserValue);
                 }
 #endif
                 if(_resetTimerAfterFinish){
@@ -312,18 +335,36 @@
         }
     }
 
+    
     //setting text value
     if ([_delegate respondsToSelector:@selector(timerLabel:customTextToDisplayAtTime:)]) {
         NSTimeInterval atTime = (_timerType == MZTimerLabelTypeStopWatch) ? timeDiff : (timeUserValue - timeDiff);
         NSString *customtext = [_delegate timerLabel:self customTextToDisplayAtTime:atTime];
         if ([customtext length]) {
             self.timeLabel.text = customtext;
-            return;
+        }else{
+            self.timeLabel.text = [self.dateFormatter stringFromDate:timeToShow];
+        }
+    }else{
+        
+        if(_shouldCountBeyondHHLimit) {
+            //0.4.7 added---start//
+            NSString *originalTimeFormat = _timeFormat;
+            NSString *beyondFormat = [_timeFormat stringByReplacingOccurrencesOfString:@"HH" withString:kHourFormatReplace];
+            beyondFormat = [beyondFormat stringByReplacingOccurrencesOfString:@"H" withString:kHourFormatReplace];
+            self.dateFormatter.dateFormat = beyondFormat;
+            
+            int hours = [self getTimeCounted] / 3600;
+            NSString *formmattedDate = [self.dateFormatter stringFromDate:timeToShow];
+            NSString *beyondedDate = [formmattedDate stringByReplacingOccurrencesOfString:kHourFormatReplace withString:[NSString stringWithFormat:@"%02d",hours]];
+            
+            self.timeLabel.text = beyondedDate;
+            self.dateFormatter.dateFormat = originalTimeFormat;
+            //0.4.7 added---endb//
+        }else{
+            self.timeLabel.text = [self.dateFormatter stringFromDate:timeToShow];
         }
     }
-    
-    NSString *strDate = [self.dateFormatter stringFromDate:timeToShow];
-    self.timeLabel.text = strDate;
     
 }
 
