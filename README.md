@@ -75,20 +75,32 @@ You can start,pause,reset your timer with your custom control, set your control 
 -(void)reset;
 ```
 
-And you control the time at the begining or during runtime with these methods
+#### Getter and Setters
+
+You may control the time value and behaviours at the begining or during runtime with these properties and methods
 
 ```
+@property (assign) BOOL shouldCountBeyondHHLimit;   //see example #12
+@property (assign) BOOL resetTimerAfterFinish;      //see example #7
+
 -(void)setCountDownTime:(NSTimeInterval)time;
 -(void)setStopWatchTime:(NSTimeInterval)time;
 -(void)setCountDownToDate:(NSDate*)date;
--(void)addTimeCountedByTime:(NSTimeInterval)timeToAdd;
+-(void)addTimeCountedByTime:(NSTimeInterval)timeToAdd; //see example #10, #11
 ```
 
+And if you want to have information of the timer, here is how.
 
+```
+@property (assign,readonly) BOOL counting;  //see example #4-7
+
+- (NSTimeInterval)getTimeCounted;    //see example #3
+- (NSTimeInterval)getTimeRemaining;  //see example #3
+```
 
 ###Timer Finish Handling
 
-Usually when you need a timer, you need to deal with it after it finished counting. Following are 2 examples showing how to do it using `delegate` and `block` methods.
+Usually when you need a timer, you need to deal with it after it finished. Following are 2 examples showing how to do it using `delegate` and `block` methods.
 
 ####Delegate
 
@@ -122,6 +134,17 @@ Finally, implement the delegate method `timerLabel:finshedCountDownTimerWithTime
  
  ```
  
+ Or set it seperately
+ 
+ ```
+    [timer3 setCountDownTime:60]; 
+    timer.endedBlock = ^(NSTimeInterval countTime) {
+        //oh my gosh, it's awesome!!
+    };
+    [timer start];
+```
+
+ 
 ###More Examples
 
 Please check the demo project I provided, with well explained example code inside.
@@ -135,8 +158,3 @@ This code is distributed under the terms and conditions of the [MIT license](LIC
 1. ~~Submit to CocaPods~~
 2. ~~Better performance.~~
 3. __Your suggestions!:D__
-
-### Donations
-
-[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/hk/cgi-bin/webscr?cmd=_flow&SESSION=7kbCkfBlNfRFeELE0Sf_M0zirSMf2i-QwDO__seqKccp_qXfRHxa6-QYNuW&dispatch=50a222a57771920b6a3d7b606239e4d529b525e0b7e69bf0224adecfb0124e9b61f737ba21b081986471f9b93cfa01e00b63629be0164db1)
-
