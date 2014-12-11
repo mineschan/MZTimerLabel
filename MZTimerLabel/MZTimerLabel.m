@@ -336,6 +336,8 @@
     }
 
     
+    if(!_counting) return;
+    
     //setting text value
     if ([_delegate respondsToSelector:@selector(timerLabel:customTextToDisplayAtTime:)]) {
         NSTimeInterval atTime = (_timerType == MZTimerLabelTypeStopWatch) ? timeDiff : (timeUserValue - timeDiff);
