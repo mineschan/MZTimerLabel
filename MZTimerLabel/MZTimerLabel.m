@@ -32,7 +32,7 @@
 #define kDefaultTimeFormat  @"HH:mm:ss"
 #define kHourFormatReplace  @"!!!*"
 #define kDefaultFireIntervalNormal  0.1
-#define kDefaultFireIntervalHighUse  0.02
+#define kDefaultFireIntervalHighUse  0.01
 #define kDefaultTimerType MZTimerLabelTypeStopWatch
 
 @interface MZTimerLabel(){
@@ -231,7 +231,7 @@
         startCountDate = [NSDate date];
         
         if (self.timerType == MZTimerLabelTypeStopWatch && timeUserValue > 0) {
-            startCountDate = [startCountDate dateByAddingTimeInterval:(timeUserValue<0)?0:-timeUserValue];
+            startCountDate = [startCountDate dateByAddingTimeInterval:-timeUserValue];
         }
     }
     if(pausedTime != nil){
