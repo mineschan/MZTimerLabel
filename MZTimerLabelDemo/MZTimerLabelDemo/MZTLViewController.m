@@ -81,15 +81,17 @@
      ********************************************/
     timerExample6 = [[MZTimerLabel alloc] initWithLabel:_lblTimerExample6 andTimerType:MZTimerLabelTypeTimer];
     [timerExample6 setCountDownTime:5];
+    timerExample6.resetTimerAfterFinish = YES;
     timerExample6.delegate = self;
     
     /*******************************************
      * ------Example 7-----
      * Countdown finish callback with convenient callback block
+     * and showing how to set text of label after.
      ********************************************/
     timerExample7 = [[MZTimerLabel alloc] initWithLabel:_lblTimerExample7 andTimerType:MZTimerLabelTypeTimer];
-    [timerExample7 setCountDownTime:5];
-    timerExample7.resetTimerAfterFinish = YES;
+    [timerExample7 setCountDownTime:0];
+    timerExample7.resetTimerAfterFinish = NO; //IMPORTANT, if you needs custom text with finished, please do not set resetTimerAfterFinish to YES.
     timerExample7.timeFormat = @"mm:ss SS";
     
     /*******************************************
@@ -239,10 +241,7 @@
     if(![timerExample7 counting]){
         
         [timerExample7 startWithEndingBlock:^(NSTimeInterval countTime) {
-            
-            NSString *msg = [NSString stringWithFormat:@"Countdown of Example 7 finished!\nTime counted: %i seconds",(int)countTime];
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Alert" message:msg delegate:nil cancelButtonTitle:@"Awesome!" otherButtonTitles:nil];
-            [alertView show];
+            timerExample7.timeLabel.text = @"Timer Finished!";
         }];
         
         //or you can do this
