@@ -96,6 +96,17 @@
 	return self;
 }
 
+#pragma mark - Cleanup
+
+- (void) removeFromSuperview {
+    if (_timer) {
+        [_timer invalidate];
+        _timer = nil;
+    }
+    
+    [super removeFromSuperview];
+}
+
 #pragma mark - Getter and Setter Method
 
 - (void)setStopWatchTime:(NSTimeInterval)time{
