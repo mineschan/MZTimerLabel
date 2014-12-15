@@ -1,8 +1,8 @@
 //
 //  MZTimerLabel.h
-//  Version 0.5
+//  Version 0.5.1
 //  Created by MineS Chan on 2013-10-16
-//  Updated 2014-12-04
+//  Updated 2014-12-15
 
 // This code is distributed under the terms and conditions of the MIT license. 
 
