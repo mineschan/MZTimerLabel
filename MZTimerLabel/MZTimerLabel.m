@@ -216,6 +216,15 @@
     return 0;
 }
 
+- (NSTimeInterval)getCountDownTime {
+    
+    if (_timerType == MZTimerLabelTypeTimer) {
+        return timeUserValue;
+    }
+    
+    return 0;
+}
+
 - (void)setShouldCountBeyondHHLimit:(BOOL)shouldCountBeyondHHLimit {
     _shouldCountBeyondHHLimit = shouldCountBeyondHHLimit;
     [self updateLabel];

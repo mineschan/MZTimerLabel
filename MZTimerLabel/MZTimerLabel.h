@@ -115,7 +115,7 @@ typedef enum{
 /*--------Getter methods*/
 - (NSTimeInterval)getTimeCounted;
 - (NSTimeInterval)getTimeRemaining;
-
+- (NSTimeInterval)getCountDownTime;
 
 
 
