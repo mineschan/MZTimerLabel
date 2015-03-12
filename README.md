@@ -96,6 +96,7 @@ And if you want to have information of the timer, here is how.
 
 - (NSTimeInterval)getTimeCounted;    //see example #3
 - (NSTimeInterval)getTimeRemaining;  //see example #3
+- (NSTimeInterval)getCountDownTime;  
 ```
 
 ###Timer Finish Handling
