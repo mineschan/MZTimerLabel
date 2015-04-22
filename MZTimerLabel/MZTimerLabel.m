@@ -359,7 +359,7 @@
             beyondFormat = [beyondFormat stringByReplacingOccurrencesOfString:@"H" withString:kHourFormatReplace];
             self.dateFormatter.dateFormat = beyondFormat;
             
-            int hours = [self getTimeCounted] / 3600;
+            int hours = (_timerType == MZTimerLabelTypeStopWatch)? ([self getTimeCounted] / 3600) : ([self getTimeRemaining] / 3600);
             NSString *formmattedDate = [self.dateFormatter stringFromDate:timeToShow];
             NSString *beyondedDate = [formmattedDate stringByReplacingOccurrencesOfString:kHourFormatReplace withString:[NSString stringWithFormat:@"%02d",hours]];
             
