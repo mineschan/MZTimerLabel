@@ -7,7 +7,7 @@ MZTimerLabel
 [![Cocoapod Latest Version](http://img.shields.io/cocoapods/v/MZTimerLabel.svg?style=flat)](https://cocoapods.org/?q=MZTimerLabel)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
-<img align="center" src="https://raw.github.com/mineschan/MZTimerLabel/master/MZTimerLabel_Demo.png" alt="ScreenShot" width="300">
+<img align="center" src="https://raw.github.com/mineschan/MZTimerLabel/master/demo.gif" alt="ScreenShot" width="300">
 <img align="center" src="https://raw.github.com/mineschan/MZTimerLabel/master/MZTimerLabel_Demo2.png" alt="ScreenShot2" width="300">
 
 ###Purpose
