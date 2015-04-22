@@ -1,6 +1,10 @@
 MZTimerLabel
 ============
 
+
+![License](https://cocoapod-badges.herokuapp.com/l/MZTimerLabel/badge.(png|svg))
+![Platforms](https://cocoapod-badges.herokuapp.com/p/MZTimerLabel/badge.png)
+[![Cocoapod Latest Version](http://img.shields.io/cocoapods/v/MZTimerLabel.svg?style=flat)](https://cocoapods.org/?q=MZTimerLabel)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 <img align="center" src="https://raw.github.com/mineschan/MZTimerLabel/master/MZTimerLabel_Demo.png" alt="ScreenShot" width="300">
