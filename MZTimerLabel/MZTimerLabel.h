@@ -95,7 +95,8 @@ typedef enum{
 -(id)initWithTimerType:(MZTimerLabelType)theType;
 -(id)initWithLabel:(UILabel*)theLabel andTimerType:(MZTimerLabelType)theType;
 -(id)initWithLabel:(UILabel*)theLabel;
-
+/*--------designated Initializer*/
+-(id)initWithFrame:(CGRect)frame label:(UILabel*)theLabel andTimerType:(MZTimerLabelType)theType;
 
 /*--------Timer control methods to use*/
 -(void)start;
