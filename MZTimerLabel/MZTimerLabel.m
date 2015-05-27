@@ -58,33 +58,30 @@
 
 @synthesize timeFormat = _timeFormat;
 
-- (id)initWithTimerType:(MZTimerLabelType)theType{
-    return [self initWithLabel:nil andTimerType:theType];
+- (id)initWithTimerType:(MZTimerLabelType)theType {
+    return [self initWithFrame:CGRectZero label:nil andTimerType:theType];
 }
 
-- (id)initWithLabel:(UILabel *)theLabel andTimerType:(MZTimerLabelType)theType
-{
-    self = [super init];
-    
-    if(self){
+- (id)initWithLabel:(UILabel *)theLabel andTimerType:(MZTimerLabelType)theType {
+    return [self initWithFrame:CGRectZero label:theLabel andTimerType:theType];
+}
+
+- (id)initWithLabel:(UILabel*)theLabel {
+    return [self initWithFrame:CGRectZero label:theLabel andTimerType:kDefaultTimerType];
+}
+
+- (id)initWithFrame:(CGRect)frame {
+    return [self initWithFrame:frame label:nil andTimerType:kDefaultTimerType];
+}
+
+-(id)initWithFrame:(CGRect)frame label:(UILabel*)theLabel andTimerType:(MZTimerLabelType)theType {
+    self = [super initWithFrame:frame];
+    if (self) {
         self.timeLabel = theLabel;
         self.timerType = theType;
         [self setup];
     }
     return self;
-}
-
-- (id)initWithLabel:(UILabel*)theLabel{
-    return [self initWithLabel:theLabel andTimerType:kDefaultTimerType];
-}
-
-- (id)initWithFrame:(CGRect)frame{
-    
-    self = [super initWithFrame:frame];
-	if (self) {
-        [self setup];
-	}
-	return self;
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -343,7 +340,7 @@
 
     //setting text value
     if ([_delegate respondsToSelector:@selector(timerLabel:customTextToDisplayAtTime:)]) {
-        NSTimeInterval atTime = (_timerType == MZTimerLabelTypeStopWatch) ? timeDiff : (timeUserValue - timeDiff);
+        NSTimeInterval atTime = (_timerType == MZTimerLabelTypeStopWatch) ? timeDiff : ((timeUserValue - timeDiff) < 0 ? 0 : (timeUserValue - timeDiff));
         NSString *customtext = [_delegate timerLabel:self customTextToDisplayAtTime:atTime];
         if ([customtext length]) {
             self.timeLabel.text = customtext;
