@@ -74,6 +74,9 @@ typedef enum{
 /*Target label obejct, default self if you do not initWithLabel nor set*/
 @property (nonatomic,strong) UILabel *timeLabel;
 
+/*Used for replace text in range */
+@property (nonatomic, assign) NSRange textRange;
+
 /*Type to choose from stopwatch or timer*/
 @property (assign) MZTimerLabelType timerType;
 

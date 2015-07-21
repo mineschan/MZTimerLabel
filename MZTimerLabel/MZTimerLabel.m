@@ -364,7 +364,12 @@
             self.dateFormatter.dateFormat = originalTimeFormat;
             //0.4.7 added---endb//
         }else{
-            self.timeLabel.text = [self.dateFormatter stringFromDate:timeToShow];
+            if(self.textRange.length > 0){
+                NSString* labelText = [self.text stringByReplacingCharactersInRange:self.textRange withString:[self.dateFormatter stringFromDate:timeToShow]];
+                self.timeLabel.text = labelText;
+            } else {
+                self.timeLabel.text = [self.dateFormatter stringFromDate:timeToShow];
+            }
         }
     }
     
