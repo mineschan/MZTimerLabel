@@ -20,6 +20,7 @@
     MZTimerLabel *timerExample10;
     MZTimerLabel *timerExample11;
     MZTimerLabel *timerExample12;
+    MZTimerLabel *timerExample13;
 }
 
 /*Controls for Example 1*/
@@ -81,5 +82,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblTimerExample12;
 - (IBAction)startStopwatchBeyond23Hours:(id)sender;
 - (IBAction)toggleStopwatchBeyond24Hours:(id)sender;
+
+/*Controls and Methods for Example 13*/
+@property (weak, nonatomic) IBOutlet UILabel *lblTimerExample13;
 
 @end

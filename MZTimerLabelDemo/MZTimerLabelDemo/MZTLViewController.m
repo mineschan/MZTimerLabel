@@ -143,6 +143,21 @@
     timerExample12 = [[MZTimerLabel alloc] initWithLabel:_lblTimerExample12 andTimerType:MZTimerLabelTypeStopWatch];
     [timerExample12 setStopWatchTime:86395];
     [timerExample12 setShouldCountBeyondHHLimit:YES];
+    
+    /*******************************************
+     * ------Example 13-----
+     * Countdown timer in text in custom range
+     ********************************************/
+    
+    timerExample13 = [[MZTimerLabel alloc] initWithLabel:_lblTimerExample13 andTimerType:MZTimerLabelTypeTimer];
+    [timerExample13 setCountDownTime:999];
+    NSString* text = @"timer here in text";
+    NSRange r = [text rangeOfString:@"here"];
+    timerExample13.text = text;
+    timerExample13.textRange = r;
+    timerExample13.timeFormat = @"ss";
+    timerExample13.resetTimerAfterFinish = YES;
+    [timerExample13 start];
 
 }
 
@@ -327,6 +342,5 @@
 - (IBAction)toggleStopwatchBeyond24Hours:(id)sender {
     [timerExample12 setShouldCountBeyondHHLimit:!timerExample12.shouldCountBeyondHHLimit];
 }
-
 
 @end
