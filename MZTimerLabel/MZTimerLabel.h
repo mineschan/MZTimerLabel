@@ -77,6 +77,8 @@ typedef enum{
 /*Used for replace text in range */
 @property (nonatomic, assign) NSRange textRange;
 
+@property (nonatomic, strong) NSDictionary *attributedDictionaryForTextInRange;
+
 /*Type to choose from stopwatch or timer*/
 @property (assign) MZTimerLabelType timerType;
 
