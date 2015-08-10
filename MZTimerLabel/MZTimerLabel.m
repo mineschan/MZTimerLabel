@@ -365,8 +365,19 @@
             //0.4.7 added---endb//
         }else{
             if(self.textRange.length > 0){
-                NSString* labelText = [self.text stringByReplacingCharactersInRange:self.textRange withString:[self.dateFormatter stringFromDate:timeToShow]];
-                self.timeLabel.text = labelText;
+                if(self.attributedDictionaryForTextInRange){
+                    
+                    NSAttributedString *attrTextInRange = [[NSAttributedString alloc] initWithString:[self.dateFormatter stringFromDate:timeToShow] attributes:self.attributedDictionaryForTextInRange];
+                    
+                    NSMutableAttributedString *attributedString;
+                    attributedString = [[NSMutableAttributedString alloc]initWithString:self.text];
+                    [attributedString replaceCharactersInRange:self.textRange withAttributedString:attrTextInRange];
+                    self.timeLabel.attributedText = attributedString;
+        
+                } else {
+                    NSString *labelText = [self.text stringByReplacingCharactersInRange:self.textRange withString:[self.dateFormatter stringFromDate:timeToShow]];
+                    self.timeLabel.text = labelText;
+                }
             } else {
                 self.timeLabel.text = [self.dateFormatter stringFromDate:timeToShow];
             }

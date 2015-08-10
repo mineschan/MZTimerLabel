@@ -153,6 +153,12 @@
     [timerExample13 setCountDownTime:999];
     NSString* text = @"timer here in text";
     NSRange r = [text rangeOfString:@"here"];
+    
+    UIColor* fgColor = [UIColor redColor];
+    NSDictionary* attributesForRange = @{
+                            NSForegroundColorAttributeName: fgColor,
+                            };
+    timerExample13.attributedDictionaryForTextInRange = attributesForRange;
     timerExample13.text = text;
     timerExample13.textRange = r;
     timerExample13.timeFormat = @"ss";
