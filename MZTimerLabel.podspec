@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
   s.author       = { "MineS Chan" => "mineschan@gmail.com" }
 
-  s.platform     = :ios, '6.0'
+  s.ios.deployment_target = '6.0'
 
   s.source       = { :git => "https://github.com/mineschan/MZTimerLabel.git", :tag => s.version.to_s }
 
