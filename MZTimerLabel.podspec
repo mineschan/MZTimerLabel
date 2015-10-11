@@ -11,6 +11,7 @@ Pod::Spec.new do |s|
   s.author       = { "MineS Chan" => "mineschan@gmail.com" }
 
   s.ios.deployment_target = '6.0'
+  s.tvos.deployment_target = '9.0'
 
   s.source       = { :git => "https://github.com/mineschan/MZTimerLabel.git", :tag => s.version.to_s }
 
