@@ -58,6 +58,12 @@
 
 @synthesize timeFormat = _timeFormat;
 
+- (void)dealloc {
+    if (_timer) {
+        [_timer invalidate];
+    }
+}
+
 - (id)initWithTimerType:(MZTimerLabelType)theType {
     return [self initWithFrame:CGRectZero label:nil andTimerType:theType];
 }
