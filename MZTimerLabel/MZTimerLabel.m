@@ -392,18 +392,23 @@
     
     //0.5.1 moved below to the bottom
     if(timerEnded) {
+        // save the timeUserValue because reset will change it
+        NSTimeInterval endTimeUserValue = timeUserValue;
+        
+        // call reset before we call delegate
+        if(_resetTimerAfterFinish){
+            [self reset];
+        }
+        
         if([_delegate respondsToSelector:@selector(timerLabel:finshedCountDownTimerWithTime:)]){
-            [_delegate timerLabel:self finshedCountDownTimerWithTime:timeUserValue];
+            [_delegate timerLabel:self finshedCountDownTimerWithTime:endTimeUserValue];
         }
         
 #if NS_BLOCKS_AVAILABLE
         if(_endedBlock != nil){
-            _endedBlock(timeUserValue);
+            _endedBlock(endTimeUserValue);
         }
 #endif
-        if(_resetTimerAfterFinish){
-            [self reset];
-        }
         
     }
     
