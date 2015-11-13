@@ -284,6 +284,10 @@
 }
 
 -(void)reset{
+    if (_timer) {
+        [_timer invalidate];
+        _timer = nil;
+    }
     pausedTime = nil;
     timeUserValue = (self.timerType == MZTimerLabelTypeStopWatch)? 0 : timeUserValue;
     startCountDate = (self.counting)? [NSDate date] : nil;
