@@ -101,7 +101,14 @@
 
 #pragma mark - Cleanup
 
-- (void) removeFromSuperview {
+- (void)cleanTimerLabel {
+    if (_timer) {
+        [_timer invalidate];
+        _timer = nil;
+    }
+}
+
+- (void)removeFromSuperview {
     if (_timer) {
         [_timer invalidate];
         _timer = nil;
