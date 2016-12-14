@@ -27,7 +27,7 @@
 // THE SOFTWARE.
 
 #import "MZTimerLabel.h"
-
+#import "NSTimer+Block.h"
 
 #define kDefaultTimeFormat  @"HH:mm:ss"
 #define kHourFormatReplace  @"!!!*"
@@ -243,21 +243,21 @@
         _timer = nil;
     }
     
+    CGFloat precision;
+    
+    if ([self.timeFormat rangeOfString:@"SS"].location != NSNotFound){
+    
+        precision = kDefaultFireIntervalHighUse;
+    }else{
+    
+        precision = kDefaultFireIntervalNormal;
+    }
+    
     __weak typeof(self)weakself = self;
     
-    if ([self.timeFormat rangeOfString:@"SS"].location != NSNotFound) {
-       
-        _timer = [NSTimer scheduledTimerWithTimeInterval:kDefaultFireIntervalHighUse
-                                                 repeats:YES
-                                                   block:^(NSTimer * _Nonnull timer) {
-                                                        __strong typeof(weakself)strongself = weakself;
-                                                        if (strongself) {
-                                                            [strongself updateLabel];
-                                                        }
-                                                   }];
-    }else{
-     
-        _timer = [NSTimer scheduledTimerWithTimeInterval:kDefaultFireIntervalNormal
+    if ([NSTimer respondsToSelector:@selector(scheduledTimerWithTimeInterval:repeats:block:)]) {
+        
+        _timer = [NSTimer scheduledTimerWithTimeInterval:precision
                                                  repeats:YES
                                                    block:^(NSTimer * _Nonnull timer) {
                                                        __strong typeof(weakself)strongself = weakself;
@@ -265,6 +265,16 @@
                                                            [strongself updateLabel];
                                                        }
                                                    }];
+    }else{
+    
+        _timer = [NSTimer scheduledTimerWithTimeInterval:precision
+                                                   block:^{
+                                                        __strong typeof(weakself)strongself = weakself;
+                                                        if (strongself) {
+                                                            [strongself updateLabel];
+                                                        }
+                                                   }
+                                                 repeats:YES];
     }
     [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
     
