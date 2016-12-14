@@ -243,10 +243,28 @@
         _timer = nil;
     }
     
+    __weak typeof(self)weakself = self;
+    
     if ([self.timeFormat rangeOfString:@"SS"].location != NSNotFound) {
-        _timer = [NSTimer scheduledTimerWithTimeInterval:kDefaultFireIntervalHighUse target:self selector:@selector(updateLabel) userInfo:nil repeats:YES];
+       
+        _timer = [NSTimer scheduledTimerWithTimeInterval:kDefaultFireIntervalHighUse
+                                                 repeats:YES
+                                                   block:^(NSTimer * _Nonnull timer) {
+                                                        __strong typeof(weakself)strongself = weakself;
+                                                        if (strongself) {
+                                                            [strongself updateLabel];
+                                                        }
+                                                   }];
     }else{
-        _timer = [NSTimer scheduledTimerWithTimeInterval:kDefaultFireIntervalNormal target:self selector:@selector(updateLabel) userInfo:nil repeats:YES];
+     
+        _timer = [NSTimer scheduledTimerWithTimeInterval:kDefaultFireIntervalNormal
+                                                 repeats:YES
+                                                   block:^(NSTimer * _Nonnull timer) {
+                                                       __strong typeof(weakself)strongself = weakself;
+                                                       if (strongself) {
+                                                           [strongself updateLabel];
+                                                       }
+                                                   }];
     }
     [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
     
