@@ -57,6 +57,7 @@ typedef enum{
 -(void)timerLabel:(MZTimerLabel*)timerLabel finshedCountDownTimerWithTime:(NSTimeInterval)countTime;
 -(void)timerLabel:(MZTimerLabel*)timerLabel countingTo:(NSTimeInterval)time timertype:(MZTimerLabelType)timerType;
 -(NSString*)timerLabel:(MZTimerLabel*)timerLabel customTextToDisplayAtTime:(NSTimeInterval)time;
+-(NSAttributedString*)timerLabel:(MZTimerLabel*)timerLabel customAttributedTextToDisplayAtTime:(NSTimeInterval)time;
 @end
 
 /**********************************************
