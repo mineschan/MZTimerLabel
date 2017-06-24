@@ -34,7 +34,6 @@
 #define kDefaultFireIntervalNormal  0.1
 #define kDefaultFireIntervalHighUse  0.01
 #define kDefaultTimerType MZTimerLabelTypeStopWatch
-
 @interface MZTimerLabel(){
     
     NSTimeInterval timeUserValue;
@@ -353,8 +352,18 @@
         }else{
             self.timeLabel.text = [self.dateFormatter stringFromDate:timeToShow];
         }
-    }else{
+    }else if([_delegate respondsToSelector:@selector(timerLabel:customAttributedTextToDisplayAtTime:)]){
+        NSTimeInterval atTime = (_timerType == MZTimerLabelTypeStopWatch) ? timeDiff : ((timeUserValue - timeDiff) < 0 ? 0 : (timeUserValue - timeDiff));
+        NSAttributedString *customtext = [_delegate timerLabel:self customAttributedTextToDisplayAtTime:atTime];
+        if ([customtext length]) {
+            self.timeLabel.attributedText = customtext;
+        }else{
+            self.timeLabel.text = [self.dateFormatter stringFromDate:timeToShow];
+        }
         
+    }else{
+
+    
         if(_shouldCountBeyondHHLimit) {
             //0.4.7 added---start//
             NSString *originalTimeFormat = _timeFormat;
