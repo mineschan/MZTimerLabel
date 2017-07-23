@@ -33,12 +33,12 @@ _Remark: This is my first iOS plugin project on github, please accept my apologi
 
 (Unfamiliar with [CocoaPods](http://cocoapods.org/) yet? It's a dependency management tool for iOS and Mac, check it out!)
 
-1. Add `pod 'MZTimerLabel'` to your podfiles
+`pod 'MZTimerLabel'`
 
 #### Carthage
 Another dependency manager is [Carthage](http://github.com/Carthage/Carthage), which does not have a centralized repository.
 
-1. Add `github "mineschan/MZTimerLabel"` to your `Cartfile`
+`github "mineschan/MZTimerLabel"`
 
 ### Easy Example
 
