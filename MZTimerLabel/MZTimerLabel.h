@@ -1,30 +1,30 @@
-//
-//  MZTimerLabel.h
-//  Version 0.5.1
-//  Created by MineS Chan on 2013-10-16
-//  Updated 2014-12-15
+    //
+    //  MZTimerLabel.h
+    //  Version 0.5.1
+    //  Created by MineS Chan on 2013-10-16
+    //  Updated 2014-12-15
 
-// This code is distributed under the terms and conditions of the MIT license. 
+    // This code is distributed under the terms and conditions of the MIT license.
 
-// Copyright (c) 2014 MineS Chan
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
+    // Copyright (c) 2014 MineS Chan
+    //
+    // Permission is hereby granted, free of charge, to any person obtaining a copy
+    // of this software and associated documentation files (the "Software"), to deal
+    // in the Software without restriction, including without limitation the rights
+    // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    // copies of the Software, and to permit persons to whom the Software is
+    // furnished to do so, subject to the following conditions:
+    //
+    // The above copyright notice and this permission notice shall be included in
+    // all copies or substantial portions of the Software.
+    //
+    // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    // AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+    // THE SOFTWARE.
 
 #import <UIKit/UIKit.h>
 
@@ -42,22 +42,21 @@ typedef enum{
  @optional
  
  - timerLabel:finshedCountDownTimerWithTimeWithTime:
-    ** MZTimerLabel Delegate method for finish of countdown timer
-
+ ** MZTimerLabel Delegate method for finish of countdown timer
+ 
  - timerLabel:countingTo:timertype:
-    ** MZTimerLabel Delegate method for monitering the current counting progress
+ ** MZTimerLabel Delegate method for monitering the current counting progress
  
  - timerlabel:customTextToDisplayAtTime:
-    ** MZTimerLabel Delegate method for overriding the text displaying at the time, implement this for your very custom display formmat
-**********************************************/
- 
+ ** MZTimerLabel Delegate method for overriding the text displaying at the time, implement this for your very custom display formmat
+ **********************************************/
+
 @class MZTimerLabel;
 @protocol MZTimerLabelDelegate <NSObject>
 @optional
 -(void)timerLabel:(MZTimerLabel*)timerLabel finshedCountDownTimerWithTime:(NSTimeInterval)countTime;
 -(void)timerLabel:(MZTimerLabel*)timerLabel countingTo:(NSTimeInterval)time timertype:(MZTimerLabelType)timerType;
 -(NSString*)timerLabel:(MZTimerLabel*)timerLabel customTextToDisplayAtTime:(NSTimeInterval)time;
--(NSAttributedString*)timerLabel:(MZTimerLabel*)timerLabel customAttributedTextToDisplayAtTime:(NSTimeInterval)time;
 @end
 
 /**********************************************
@@ -124,6 +123,7 @@ typedef enum{
 - (NSTimeInterval)getTimeRemaining;
 - (NSTimeInterval)getCountDownTime;
 
+-(void)updateLabelWihDate:(NSDate*)startedDate;
 
 
 

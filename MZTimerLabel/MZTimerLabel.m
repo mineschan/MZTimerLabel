@@ -1,30 +1,30 @@
-//
-//  MZTimerLabel.h
-//  Version 0.5.1
-//  Created by MineS Chan on 2013-10-16
-//  Updated 2014-12-15
+    //
+    //  MZTimerLabel.h
+    //  Version 0.5.1
+    //  Created by MineS Chan on 2013-10-16
+    //  Updated 2014-12-15
 
-// This code is distributed under the terms and conditions of the MIT license.
+    // This code is distributed under the terms and conditions of the MIT license.
 
-// Copyright (c) 2014 MineS Chan
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
+    // Copyright (c) 2014 MineS Chan
+    //
+    // Permission is hereby granted, free of charge, to any person obtaining a copy
+    // of this software and associated documentation files (the "Software"), to deal
+    // in the Software without restriction, including without limitation the rights
+    // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    // copies of the Software, and to permit persons to whom the Software is
+    // furnished to do so, subject to the following conditions:
+    //
+    // The above copyright notice and this permission notice shall be included in
+    // all copies or substantial portions of the Software.
+    //
+    // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    // AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+    // THE SOFTWARE.
 
 #import "MZTimerLabel.h"
 
@@ -34,6 +34,7 @@
 #define kDefaultFireIntervalNormal  0.1
 #define kDefaultFireIntervalHighUse  0.01
 #define kDefaultTimerType MZTimerLabelTypeStopWatch
+
 @interface MZTimerLabel(){
     
     NSTimeInterval timeUserValue;
@@ -56,12 +57,6 @@
 @implementation MZTimerLabel
 
 @synthesize timeFormat = _timeFormat;
-
-- (void)dealloc {
-    if (_timer) {
-        [_timer invalidate];
-    }
-}
 
 - (id)initWithTimerType:(MZTimerLabelType)theType {
     return [self initWithFrame:CGRectZero label:nil andTimerType:theType];
@@ -91,11 +86,11 @@
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
-	self = [super initWithCoder:aDecoder];
-	if (self) {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
         [self setup];
-	}
-	return self;
+    }
+    return self;
 }
 
 #pragma mark - Cleanup
@@ -139,7 +134,7 @@
         timeToCountOff = [date1970 dateByAddingTimeInterval:0];
     }
     [self updateLabel];
-
+    
 }
 
 - (void)setTimeFormat:(NSString *)timeFormat{
@@ -187,7 +182,7 @@
     }else if (_timerType == MZTimerLabelTypeStopWatch) {
         NSDate *newStartDate = [startCountDate dateByAddingTimeInterval:-timeToAdd];
         if([[NSDate date] timeIntervalSinceDate:newStartDate] <= 0) {
-            //prevent less than 0
+                //prevent less than 0
             startCountDate = [NSDate date];
         }else{
             startCountDate = newStartDate;
@@ -272,14 +267,14 @@
     [self start];
 }
 #endif
-    
+
 -(void)pause{
-	if(_counting){
-	    [_timer invalidate];
-	    _timer = nil;
-	    _counting = NO;
-	    pausedTime = [NSDate date];		
-	}
+    if(_counting){
+        [_timer invalidate];
+        _timer = nil;
+        _counting = NO;
+        pausedTime = [NSDate date];
+    }
 }
 
 -(void)reset{
@@ -299,7 +294,7 @@
 
 
 -(void)updateLabel{
-
+    
     NSTimeInterval timeDiff = [[NSDate date] timeIntervalSinceDate:startCountDate];
     NSDate *timeToShow = [NSDate date];
     BOOL timerEnded = false;
@@ -317,10 +312,10 @@
         if([_delegate respondsToSelector:@selector(timerLabel:countingTo:timertype:)]){
             [_delegate timerLabel:self countingTo:timeDiff timertype:_timerType];
         }
-    
+        
     }else{
         
-    /***MZTimerLabelTypeTimer Logic***/
+        /***MZTimerLabelTypeTimer Logic***/
         
         if (_counting) {
             
@@ -328,7 +323,7 @@
                 NSTimeInterval timeLeft = timeUserValue - timeDiff;
                 [_delegate timerLabel:self countingTo:timeLeft timertype:_timerType];
             }
-                        
+            
             if(timeDiff >= timeUserValue){
                 [self pause];
                 timeToShow = [date1970 dateByAddingTimeInterval:0];
@@ -342,8 +337,8 @@
             timeToShow = timeToCountOff;
         }
     }
-
-    //setting text value
+    
+        //setting text value
     if ([_delegate respondsToSelector:@selector(timerLabel:customTextToDisplayAtTime:)]) {
         NSTimeInterval atTime = (_timerType == MZTimerLabelTypeStopWatch) ? timeDiff : ((timeUserValue - timeDiff) < 0 ? 0 : (timeUserValue - timeDiff));
         NSString *customtext = [_delegate timerLabel:self customTextToDisplayAtTime:atTime];
@@ -352,20 +347,10 @@
         }else{
             self.timeLabel.text = [self.dateFormatter stringFromDate:timeToShow];
         }
-    }else if([_delegate respondsToSelector:@selector(timerLabel:customAttributedTextToDisplayAtTime:)]){
-        NSTimeInterval atTime = (_timerType == MZTimerLabelTypeStopWatch) ? timeDiff : ((timeUserValue - timeDiff) < 0 ? 0 : (timeUserValue - timeDiff));
-        NSAttributedString *customtext = [_delegate timerLabel:self customAttributedTextToDisplayAtTime:atTime];
-        if ([customtext length]) {
-            self.timeLabel.attributedText = customtext;
-        }else{
-            self.timeLabel.text = [self.dateFormatter stringFromDate:timeToShow];
-        }
-        
     }else{
-
-    
+        
         if(_shouldCountBeyondHHLimit) {
-            //0.4.7 added---start//
+                //0.4.7 added---start//
             NSString *originalTimeFormat = _timeFormat;
             NSString *beyondFormat = [_timeFormat stringByReplacingOccurrencesOfString:@"HH" withString:kHourFormatReplace];
             beyondFormat = [beyondFormat stringByReplacingOccurrencesOfString:@"H" withString:kHourFormatReplace];
@@ -377,7 +362,7 @@
             
             self.timeLabel.text = beyondedDate;
             self.dateFormatter.dateFormat = originalTimeFormat;
-            //0.4.7 added---endb//
+                //0.4.7 added---endb//
         }else{
             if(self.textRange.length > 0){
                 if(self.attributedDictionaryForTextInRange){
@@ -388,7 +373,7 @@
                     attributedString = [[NSMutableAttributedString alloc]initWithString:self.text];
                     [attributedString replaceCharactersInRange:self.textRange withAttributedString:attrTextInRange];
                     self.timeLabel.attributedText = attributedString;
-        
+                    
                 } else {
                     NSString *labelText = [self.text stringByReplacingCharactersInRange:self.textRange withString:[self.dateFormatter stringFromDate:timeToShow]];
                     self.timeLabel.text = labelText;
@@ -399,7 +384,7 @@
         }
     }
     
-    //0.5.1 moved below to the bottom
+        //0.5.1 moved below to the bottom
     if(timerEnded) {
         if([_delegate respondsToSelector:@selector(timerLabel:finshedCountDownTimerWithTime:)]){
             [_delegate timerLabel:self finshedCountDownTimerWithTime:timeUserValue];
@@ -418,4 +403,9 @@
     
 }
 
+-(void)updateLabelWihDate:(NSDate*)startedDate{
+    startCountDate = startedDate;
+    [self updateLabel];
+    [self start];
+}
 @end
