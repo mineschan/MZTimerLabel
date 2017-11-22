@@ -100,7 +100,14 @@
 
 #pragma mark - Cleanup
 
-- (void) removeFromSuperview {
+- (void)cleanTimerLabel {
+    if (_timer) {
+        [_timer invalidate];
+        _timer = nil;
+    }
+}
+
+- (void)removeFromSuperview {
     if (_timer) {
         [_timer invalidate];
         _timer = nil;
@@ -125,6 +132,7 @@
     
     timeUserValue = (time < 0)? 0 : time;
     timeToCountOff = [date1970 dateByAddingTimeInterval:timeUserValue];
+    timeToCountOff = [timeToCountOff dateByAddingTimeInterval:0.99];
     [self updateLabel];
 }
 

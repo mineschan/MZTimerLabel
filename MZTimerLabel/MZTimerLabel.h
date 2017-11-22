@@ -73,7 +73,7 @@ typedef enum{
 @property (nonatomic,copy) NSString *timeFormat;
 
 /*Target label obejct, default self if you do not initWithLabel nor set*/
-@property (nonatomic,strong) UILabel *timeLabel;
+@property (nonatomic,weak) UILabel *timeLabel;
 
 /*Used for replace text in range */
 @property (nonatomic, assign) NSRange textRange;
@@ -111,6 +111,7 @@ typedef enum{
 #endif
 -(void)pause;
 -(void)reset;
+- (void)cleanTimerLabel;
 
 /*--------Setter methods*/
 -(void)setCountDownTime:(NSTimeInterval)time;
