@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		279565FD1E013A1700ABA8B6 /* NSTimer+Block.h in Headers */ = {isa = PBXBuildFile; fileRef = 279565FB1E013A1700ABA8B6 /* NSTimer+Block.h */; };
+		279565FE1E013A1700ABA8B6 /* NSTimer+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 279565FC1E013A1700ABA8B6 /* NSTimer+Block.m */; };
 		40A965371AD4CDB700B2D499 /* MZTimerLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 40A965111AD4CAF500B2D499 /* MZTimerLabel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		40A965381AD4CDBD00B2D499 /* MZTimerLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A965121AD4CAF500B2D499 /* MZTimerLabel.m */; };
 /* End PBXBuildFile section */
@@ -22,6 +24,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		279565FB1E013A1700ABA8B6 /* NSTimer+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+Block.h"; sourceTree = "<group>"; };
+		279565FC1E013A1700ABA8B6 /* NSTimer+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+Block.m"; sourceTree = "<group>"; };
 		40A965111AD4CAF500B2D499 /* MZTimerLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZTimerLabel.h; sourceTree = "<group>"; };
 		40A965121AD4CAF500B2D499 /* MZTimerLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MZTimerLabel.m; sourceTree = "<group>"; };
 		40A9651A1AD4CB5F00B2D499 /* MZTimerLabel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MZTimerLabel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,6 +71,8 @@
 		40A9651C1AD4CB5F00B2D499 /* MZTimerLabel */ = {
 			isa = PBXGroup;
 			children = (
+				279565FB1E013A1700ABA8B6 /* NSTimer+Block.h */,
+				279565FC1E013A1700ABA8B6 /* NSTimer+Block.m */,
 				40A965111AD4CAF500B2D499 /* MZTimerLabel.h */,
 				40A965121AD4CAF500B2D499 /* MZTimerLabel.m */,
 				40A9651D1AD4CB5F00B2D499 /* Supporting Files */,
@@ -90,6 +96,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				40A965371AD4CDB700B2D499 /* MZTimerLabel.h in Headers */,
+				279565FD1E013A1700ABA8B6 /* NSTimer+Block.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,6 +195,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				279565FE1E013A1700ABA8B6 /* NSTimer+Block.m in Sources */,
 				40A965381AD4CDBD00B2D499 /* MZTimerLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
