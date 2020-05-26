@@ -18,18 +18,18 @@ MZTimerLabel is a UILabel subclass, which is a handy way to use UILabel as a cou
 
 Author: [MineS Chan](https://github.com/mineschan/) and awesome [contributors](https://github.com/mineschan/MZTimerLabel/graphs/contributors).
 
-_Remark: This is my first iOS plugin project on github, please accept my apologize if any bad coding._
+_Remark: This is my first iOS plugin project on GitHub, please accept my apologize if any bad coding._
 
 ### Requirements
-* ARC
-* iOS 5.0+
+* iOS 10.0+
+* Swift 5.0
 
 ### Installations
 
 #### Manual
 
-1. Download or clone MZTimerLabel, add `MZTimerLabel.h` and `MZTimerLabel.m` source files into your project.
-2. `#import "MZTimerLabel.h"` whereever you need it.
+1. Download or clone MZTimerLabel, add `MZTimerLabel.swift` source files into your project.
+2. `import MZTimerLabel` wherever you need it.
 
 #### CocoaPods
 
@@ -53,12 +53,23 @@ To use MZTimerLabel as a stopwatch and counter, you need only __2 lines__.
     MZTimerLabel *stopwatch = [[MZTimerLabel alloc] initWithLabel:aUILabel];
     [stopwatch start];
  ```
+ 
+ ```swift
+    let stopwatch = MZTimerLabel(label: aUILabel)
+    stopwatch.start()
+ ```
 
 Easy? If you are looking for a timer, things is just similar.
  ```objective-c
     MZTimerLabel *timer = [[MZTimerLabel alloc] initWithLabel:aUILabel andTimerType:MZTimerLabelTypeTimer];
     [timer setCountDownTime:60];
     [timer start];
+ ```
+ 
+ ```swift
+    let timer = MZTimerLabel(label: aUILabel, timerType: .timer)
+    timer.setCountDown(time:60)
+    timer.start()
  ```
 
 Now the timer will start counting from 60 to 0 ;)
@@ -76,44 +87,58 @@ As MZTimerLabel is a UILabel subclass, you can directly allocate it as a normal 
     [redStopwatch start];
  ```
  
+ ```swift
+    let redStopwatch = MZTimerLabel()
+    redStopwatch.frame = CGRect(x: 100, y:50, width: 100, height: 20)
+    redStopwatch.timeLabel.font = UIFont(systemFontOf: 20.0)
+    redStopwatch.timeLabel.textColor = UIColor.red
+    self.view.addSubview(redStopwatch)
+    redStopwatch.start()
+ ```
+ 
 MZTimerLabel uses `00:00:00 (HH:mm:ss)` as time format, if you prefer using another format such as including milliseconds.Your can set your time format like below.
 
-`timerExample4.timeFormat = @"HH:mm:ss SS";`
+```objective-c
+    timerExample.timeFormat = @"HH:mm:ss SS";
+```
 
+```swift
+    timerExample.timeFormat = "HH:mm:ss SS"
+```
  
  
 ### Control the timer
 
-You can start,pause,reset your timer with your custom control, set your control up and call these methods:
+You can start, pause, reset your timer with your custom control, set your control up and call these methods:
 
 ```
--(void)start;
--(void)pause;
--(void)reset;
+func start()
+func pause()
+func reset()
 ```
 
 #### Getter and Setters
 
-You may control the time value and behaviours at the begining or during runtime with these properties and methods
+You may control the time value and behaviours at the beginning or during runtime with these properties and methods
 
 ```
-@property (assign) BOOL shouldCountBeyondHHLimit;   //see example #12
-@property (assign) BOOL resetTimerAfterFinish;      //see example #7
+var shouldCountBeyondHHLimit: Bool   //see example #12
+var resetTimerAfterFinish: Bool      //see example #7
 
--(void)setCountDownTime:(NSTimeInterval)time;
--(void)setStopWatchTime:(NSTimeInterval)time;
--(void)setCountDownToDate:(NSDate*)date;
--(void)addTimeCountedByTime:(NSTimeInterval)timeToAdd; //see example #10, #11
+func setCountDown(time: TimeInterval)
+func setStopWatch(time: TimeInterval)
+func setCountDownTo(date: Date)
+func addTimeCounted(by time: TimeInterval)  //see example #10, #11
 ```
 
 And if you want to have information of the timer, here is how.
 
 ```
-@property (assign,readonly) BOOL counting;  //see example #4-7
+private(set) var counting: Bool         //see example #4-7
 
-- (NSTimeInterval)getTimeCounted;    //see example #3
-- (NSTimeInterval)getTimeRemaining;  //see example #3
-- (NSTimeInterval)getCountDownTime;  
+func getTimeCounted() -> TimeInterval   //see example #3
+func getTimeRemaining() -> TimeInterval //see example #3
+func getCountDownTime() -> TimeInterval
 ```
 
 ### Timer Finish Handling
@@ -129,11 +154,20 @@ First, set the delegate of the timer label.
 And then implement `MZTimerLabelDelegate` protocol in your dedicated class
 
 `@interface ViewController : UIViewController<MZTimerLabelDelegate>`
+or
+`class ViewController : UIViewController, MZTimerLabelDelegate`
 
-Finally, implement the delegate method `timerLabel:finshedCountDownTimerWithTimeWithTime:`
+Finally, implement the delegate method `timerLabel(_ timerLabel: MZTimerLabel, finishedCountDownTimerWith countTime: TimeInterval)`
+
 
  ```objective-c
- -(void)timerLabel:(MZTimerLabel*)timerLabel finshedCountDownTimerWithTime:(NSTimeInterval)countTime{
+ -(void)timerLabel:(MZTimerLabel*)timerLabel finishedCountDownTimerWithCountTime:(NSTimeInterval)countTime{
+    //time is up, what should I do master?
+ }
+ ```
+ 
+ ```swift
+ func timerLabel(_ timerLabel: MZTimerLabel, finishedCountDownTimerWith countTime: TimeInterval) {
     //time is up, what should I do master?
  }
  ```
@@ -145,21 +179,21 @@ Finally, implement the delegate method `timerLabel:finshedCountDownTimerWithTime
  ```objective-c
  
     MZTimerLabel *timer = [[MZTimerLabel alloc] initWithLabel:aUILabel andTimerType:MZTimerLabelTypeTimer];
-    [timer3 setCountDownTime:60]; 
+    [timer setCountDownTime:60]; 
     [timer startWithEndingBlock:^(NSTimeInterval countTime) {
         //oh my gosh, it's awesome!!
     }];
  
  ```
  
- Or set it seperately
+ ```swift
  
- ```
-    [timer3 setCountDownTime:60]; 
-    timer.endedBlock = ^(NSTimeInterval countTime) {
+    let timer = MZTimerLabel(label: aUILabel timerType: .timer)
+    timer.setCountDown(time: 60) 
+    timer.start(with: { (countTime) in
         //oh my gosh, it's awesome!!
-    };
-    [timer start];
+    })
+ 
 ```
 
  
@@ -173,6 +207,7 @@ This code is distributed under the terms and conditions of the [MIT license](LIC
 
 ### What's coming up next?
 
-1. ~~Submit to CocaPods~~
+1. ~~Submit to CocoaPods~~
 2. ~~Better performance.~~
-3. __Your suggestions!:D__
+3. ~~Swift 5 conversion~~
+4. __Your suggestions! :D__
