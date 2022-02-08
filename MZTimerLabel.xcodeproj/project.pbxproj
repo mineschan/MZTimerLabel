@@ -50,7 +50,7 @@
 		40A965091AD4CA9F00B2D499 = {
 			isa = PBXGroup;
 			children = (
-				40A9651C1AD4CB5F00B2D499 /* MZTimerLabel */,
+				40A9651C1AD4CB5F00B2D499 /* Source */,
 				40A9651B1AD4CB5F00B2D499 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -64,14 +64,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		40A9651C1AD4CB5F00B2D499 /* MZTimerLabel */ = {
+		40A9651C1AD4CB5F00B2D499 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				40A965111AD4CAF500B2D499 /* MZTimerLabel.h */,
-				40A965121AD4CAF500B2D499 /* MZTimerLabel.m */,
+				6A49F33A27A2B0D200DF671B /* MZTimerLabel */,
 				40A9651D1AD4CB5F00B2D499 /* Supporting Files */,
 			);
-			path = MZTimerLabel;
+			path = Source;
 			sourceTree = "<group>";
 		};
 		40A9651D1AD4CB5F00B2D499 /* Supporting Files */ = {
@@ -80,6 +79,15 @@
 				40A9651E1AD4CB5F00B2D499 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6A49F33A27A2B0D200DF671B /* MZTimerLabel */ = {
+			isa = PBXGroup;
+			children = (
+				40A965111AD4CAF500B2D499 /* MZTimerLabel.h */,
+				40A965121AD4CAF500B2D499 /* MZTimerLabel.m */,
+			);
+			name = MZTimerLabel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -153,6 +161,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 40A965091AD4CA9F00B2D499;
@@ -261,7 +270,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = MZTimerLabel/Info.plist;
+				INFOPLIST_FILE = Source/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -309,7 +318,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = MZTimerLabel/Info.plist;
+				INFOPLIST_FILE = Source/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
